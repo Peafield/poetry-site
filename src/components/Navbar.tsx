@@ -31,7 +31,7 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className="bg-scrim-dark fixed z-10 w-dvw h-16">
+    <nav className="bg-scrim-dark absolute z-10 w-dvw h-16">
       <div className="flex items-center justify-between p-4">
         <div>
           <Link href="/">
