@@ -9,14 +9,8 @@ interface PostsState extends CatergorisedPosts {
 export const usePostsStore = create<PostsState>()(
   persist(
     (set) => ({
-      latest: {
-        title: "",
-        preview_text: "",
-        content_text: "",
-        image_url: "",
-        date: "",
-      },
-      posts: [],
+      latest: null,
+      posts: null,
       setPosts: (data) => {
         set({
           latest: data.latest,

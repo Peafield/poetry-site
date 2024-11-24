@@ -2,6 +2,7 @@ import { Post } from "../api/posts/postSchema";
 
 export const MOCK_DATA: Post[] = [
   {
+    id: "2",
     title: "Autumn Leaves",
     preview_text: "Do you remember those autumn days as a child...",
     content_text:
@@ -10,6 +11,7 @@ export const MOCK_DATA: Post[] = [
     date: "2024-11-01",
   },
   {
+    id: "1",
     title: "Snow",
     preview_text:
       "I wake up, look through my window, What do I see? Snow—oh joy! ...",
@@ -19,6 +21,7 @@ export const MOCK_DATA: Post[] = [
     date: "2024-11-24",
   },
   {
+    id: "3",
     title: "Summer",
     preview_text: "Summer is the best season of the year...",
     content_text:

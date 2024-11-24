@@ -1,13 +1,25 @@
 import { Post } from "@/app/api/posts/postSchema";
+import { useRouter } from "next/navigation";
 
 type LastestPostProps = {
-  latestPost?: Post;
+  latestPost?: Post | null;
 };
 
 const LatestPost = ({ latestPost }: LastestPostProps) => {
-  console.log("latestInfo", latestPost);
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/poem/${latestPost?.id}`);
+  };
+
   return (
-    <div className="relative h-full">
+    <div
+      className="relative h-full cursor-pointer"
+      onClick={handleClick}
+      role="link"
+      tabIndex={0}
+      onKeyDown={handleClick}
+    >
       <div className="absolute top-16 left-0 right-0 bottom-0 flex flex-row rounded-b-[32px] inset-0">
         <div className="flex items-center justify-center w-1/2 h-full float-start rounded-bl-[32px] relative">
           <div className="w-fit bg-scrim-dark p-4 rounded-2xl absolute top-4 left-4">

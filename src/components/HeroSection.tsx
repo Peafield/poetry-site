@@ -3,7 +3,7 @@ import Image from "next/image";
 
 type HeroSectionProps = {
   children: React.ReactNode;
-  latestPost: Post | undefined;
+  latestPost: Post | null;
 };
 
 const HeroSection = ({ children, latestPost }: HeroSectionProps) => {
