@@ -1,15 +1,10 @@
-type PoemPageProps = {
-  params: {
-    id: string;
-  };
-};
+import Poem from "@/components/Poem";
 
-const PoemPage = ({ params: { id } }: PoemPageProps) => {
-  return (
-    <div>
-      <h1>Poem {id}</h1>
-    </div>
-  );
-};
-
-export default PoemPage;
+export default async function PoemPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  return <Poem id={id} />;
+}

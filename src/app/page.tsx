@@ -1,8 +1,8 @@
-import { CatergorisedPosts } from "./api/posts/postSchema";
 import Home from "@/components/Home";
+import { Post } from "./api/posts/postSchema";
 
 export default async function HomePage() {
-  let postData: CatergorisedPosts | null = null;
+  let postData: Post[] | null = null;
   const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/posts`);
   if (response.ok) {
     postData = await response.json();
@@ -11,5 +11,5 @@ export default async function HomePage() {
     console.error("Failed to fetch data");
   }
 
-  return <Home posts={postData} />;
+  return <Home postsData={postData} />;
 }

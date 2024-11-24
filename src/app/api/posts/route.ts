@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { MOCK_DATA } from "@/app/constants/mockData";
-import { CatergorisedPostsSchema } from "./postSchema";
+import { PostsArraySchema } from "./postSchema";
 
 export async function GET() {
   if (MOCK_DATA.length === 0) {
@@ -11,15 +11,8 @@ export async function GET() {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  const [latest, ...others] = sortedData;
-
-  const categorisedData = {
-    latest,
-    posts: others,
-  };
-
   try {
-    const validatedData = CatergorisedPostsSchema.parse(categorisedData);
+    const validatedData = PostsArraySchema.parse(sortedData);
     return NextResponse.json(validatedData, { status: 200 });
   } catch (error) {
     console.error("Validation error:", error);

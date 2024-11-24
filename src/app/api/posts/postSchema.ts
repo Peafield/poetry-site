@@ -11,9 +11,4 @@ export const PostSchema = z.object({
 
 export type Post = z.infer<typeof PostSchema>;
 
-export const CatergorisedPostsSchema = z.object({
-  latest: PostSchema.nullable(),
-  posts: z.array(PostSchema).nullable(),
-});
-
-export type CatergorisedPosts = z.infer<typeof CatergorisedPostsSchema>;
+export const PostsArraySchema = z.array(PostSchema);

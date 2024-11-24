@@ -1,9 +1,13 @@
+import { Post } from "@/app/api/posts/postSchema";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { CatergorisedPosts } from "@/app/api/posts/postSchema";
 
-interface PostsState extends CatergorisedPosts {
-  setPosts: (posts: CatergorisedPosts) => void;
+interface PostsState {
+  latest: Post | null;
+  posts: Post[] | null;
+  setLatest: (post: Post) => void;
+  setPosts: (posts: Post[]) => void;
+  initializeStore: (posts: Post[]) => void;
 }
 
 export const usePostsStore = create<PostsState>()(
@@ -11,12 +15,17 @@ export const usePostsStore = create<PostsState>()(
     (set) => ({
       latest: null,
       posts: null,
-      setPosts: (data) => {
+      setLatest: (post) => {
         set({
-          latest: data.latest,
-          posts: data.posts,
+          latest: post,
         });
       },
+      setPosts: (posts) => {
+        set({
+          posts: posts,
+        });
+      },
+      initializeStore: (posts) => set({ latest: posts[0], posts }),
     }),
     {
       name: "posts-storage",
