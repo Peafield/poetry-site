@@ -4,7 +4,9 @@ type HeroSectionProps = {
 
 const HeroSection = ({ children }: HeroSectionProps) => {
   return (
-    <div className="h-3/5 rounded-b-3xl bg-secondary inset-0">{children}</div>
+    <div className="h-3/5 rounded-b-[32px] bg-secondary inset-0">
+      {children}
+    </div>
   );
 };
 
