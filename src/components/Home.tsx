@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import { usePostsStore } from "../../store/postsStore";
 import { useEffect } from "react";
 import { CatergorisedPosts } from "@/app/api/posts/postSchema";
+import LatestPost from "./LatestInfo";
 
 type HomeProps = {
   posts: CatergorisedPosts | null;
@@ -23,7 +24,7 @@ const Home = ({ posts }: HomeProps) => {
     <>
       <Navbar />
       <HeroSection latestPost={latest}>
-        <h1>Hero Section</h1>
+        <LatestPost latestPost={latest} />
       </HeroSection>
     </>
   );

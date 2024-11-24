@@ -8,7 +8,7 @@ type HeroSectionProps = {
 
 const HeroSection = ({ children, latestPost }: HeroSectionProps) => {
   return (
-    <section className="h-4/5 rounded-b-[32px] bg-secondary inset-0 relative">
+    <section className="mobile:h-1/2 md:h-4/5 rounded-b-[32px] bg-secondary inset-0 relative">
       {latestPost && (
         <Image
           src={`/mockImages/${latestPost.image_url}`}

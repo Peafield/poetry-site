@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import textShadowPlugin from "@designbycode/tailwindcss-text-shadow";
 
 export default {
   content: [
@@ -20,7 +21,10 @@ export default {
       screens: {
         mobile: "400px",
       },
+      textShadow: {
+        lg: "0px 8px 16px rbga(0, 0, 0, 0)",
+      },
     },
   },
-  plugins: [],
+  plugins: [textShadowPlugin],
 } satisfies Config;
