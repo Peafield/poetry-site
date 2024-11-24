@@ -24,6 +24,9 @@ export default {
       textShadow: {
         lg: "0px 8px 16px rbga(0, 0, 0, 0)",
       },
+      boxShadow: {
+        "inner-lg": "inset 0 4px 4px 0px rgb(0 0 0 / 0.3)",
+      },
     },
   },
   plugins: [textShadowPlugin],

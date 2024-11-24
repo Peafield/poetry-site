@@ -1,9 +1,8 @@
 "use client";
 
 import HeroSection from "@/components/HeroSection";
-import Navbar from "@/components/Navbar";
 import { usePostsStore } from "../../store/postsStore";
-import LatestPost from "./LatestInfo";
+import LatestPost from "./LatestSection";
 import { Post } from "@/app/api/posts/postSchema";
 
 type HomeProps = {
@@ -22,12 +21,9 @@ const Home = ({ postsData }: HomeProps) => {
   if (!latest) return <p>Loading...</p>;
 
   return (
-    <>
-      <Navbar />
-      <HeroSection latestPost={latest}>
-        <LatestPost latestPost={latest} />
-      </HeroSection>
-    </>
+    <HeroSection post={latest}>
+      <LatestPost latestPost={latest} />
+    </HeroSection>
   );
 };
 

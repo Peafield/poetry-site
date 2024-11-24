@@ -16,7 +16,11 @@ export const MOCK_DATA: Post[] = [
     preview_text:
       "I wake up, look through my window, What do I see? Snow—oh joy! ...",
     content_text:
-      "Lorem ipsum odor amet, consectetuer adipiscing elit. Tempor velit ridiculus, arcu imperdiet blandit malesuada. Laoreet nascetur metus platea tempor curabitur platea nascetur condimentum. Conubia luctus est nunc elementum curabitur tempor bibendum. Vel curae pharetra purus netus in nunc.",
+      "In gardens where the moonlight gleams,\nWhere silver petals dance in streams,\nThe nightingale's sweet melody\nEchoes through the ancient trees.\n\n" +
+      "Beneath the stars that softly shine,\nWhere memories and dreams entwine,\nThe whispers of the evening air\nCarry secrets deep and fine.\n\n" +
+      "Through shadows cast by passing clouds,\nPast flowering vines in misty shrouds,\nA gentle breeze begins to play\nAmong the leaves in graceful crowds.\n\n" +
+      "Time stands still in this sacred space,\nWhere beauty moves with gentle grace,\nEach moment precious as the dew\nThat morning sun will soon erase.\n\n" +
+      "And as the night begins to fade,\nInto the dawn's first golden blade,\nThe garden holds its treasured peace\nIn memories that will not fade.",
     image_url: "snow.png",
     date: "2024-11-24",
   },
