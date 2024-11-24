@@ -22,7 +22,7 @@ const Home = ({ posts }: HomeProps) => {
   return (
     <>
       <Navbar />
-      <HeroSection>
+      <HeroSection latestPost={latest}>
         <h1>Hero Section</h1>
       </HeroSection>
     </>

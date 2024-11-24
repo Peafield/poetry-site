@@ -6,7 +6,7 @@ export const MOCK_DATA: Post[] = [
     preview_text: "Do you remember those autumn days as a child...",
     content_text:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Tempor velit ridiculus, arcu imperdiet blandit malesuada. Laoreet nascetur metus platea tempor curabitur platea nascetur condimentum. Conubia luctus est nunc elementum curabitur tempor bibendum. Vel curae pharetra purus netus in nunc.",
-    image_url: "public/mockImages/autumn_leaves.png",
+    image_url: "autumn_leaves.png",
     date: "2024-11-01",
   },
   {
@@ -15,7 +15,7 @@ export const MOCK_DATA: Post[] = [
       "I wake up, look through my window, What do I see? Snow—oh joy! ...",
     content_text:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Tempor velit ridiculus, arcu imperdiet blandit malesuada. Laoreet nascetur metus platea tempor curabitur platea nascetur condimentum. Conubia luctus est nunc elementum curabitur tempor bibendum. Vel curae pharetra purus netus in nunc.",
-    image_url: "public/mockImages/snow.png",
+    image_url: "snow.png",
     date: "2024-11-24",
   },
   {
@@ -23,7 +23,7 @@ export const MOCK_DATA: Post[] = [
     preview_text: "Summer is the best season of the year...",
     content_text:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Tempor velit ridiculus, arcu imperdiet blandit malesuada. Laoreet nascetur metus platea tempor curabitur platea nascetur condimentum. Conubia luctus est nunc elementum curabitur tempor bibendum. Vel curae pharetra purus netus in nunc.",
-    image_url: "public/mockImages/summer.png",
+    image_url: "summer.png",
     date: "2024-08-01",
   },
 ];
