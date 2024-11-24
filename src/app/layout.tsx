@@ -29,7 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${playfair_display.variable}`}
     >
-      <body>{children}</body>
+      <body className="w-dvw h-dvh relative inset-0">{children}</body>
     </html>
   );
 }

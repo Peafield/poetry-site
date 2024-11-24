@@ -17,6 +17,9 @@ export default {
         playfair: "var(--font-playfair)",
         playfair_display: "var(--font-playfair-display)",
       },
+      screens: {
+        mobile: "400px",
+      },
     },
   },
   plugins: [],

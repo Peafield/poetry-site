@@ -31,11 +31,11 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className="bg-scrim-dark">
+    <nav className="bg-scrim-dark absolute z-10 w-dvw h-16">
       <div className="flex items-center justify-between p-4">
         <div>
           <Link href="/">
-            <h1 className="font-playfair_display text-3xl text-primary hover:text-secondary">
+            <h1 className="font-playfair_display mobile:text-xl md:text-3xl text-primary hover:text-secondary">
               Wendi&apos;s Worminghall Whimsies
             </h1>
           </Link>
@@ -86,14 +86,14 @@ const Navbar = () => {
         <div className="space-y-4 sm:px-3">
           <div>
             <Link href="/about">
-              <h2 className="font-playfair_display text-3xl text-primary hover:text-secondary">
+              <h2 className="font-playfair_display text-xl text-primary hover:text-secondary">
                 About
               </h2>
             </Link>
           </div>
           <div>
             <Link href="/poems">
-              <h2 className="font-playfair_display text-3xl text-primary hover:text-secondary">
+              <h2 className="font-playfair_display text-xl text-primary hover:text-secondary">
                 Poems
               </h2>
             </Link>
