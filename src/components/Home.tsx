@@ -4,13 +4,14 @@ import HeroSection from "@/components/HeroSection";
 import { usePostsStore } from "../../store/postsStore";
 import { Post } from "@/app/api/posts/postSchema";
 import LatestPost from "./LatestSection";
+import Carousel from "./Carousel";
 
 type HomeProps = {
   postsData: Post[] | null;
 };
 
 const Home = ({ postsData }: HomeProps) => {
-  const { latest, initializeStore } = usePostsStore();
+  const { latest, posts, initializeStore } = usePostsStore();
 
   if (!postsData) return <p>Loading...</p>;
 
@@ -21,9 +22,12 @@ const Home = ({ postsData }: HomeProps) => {
   if (!latest) return <p>Loading...</p>;
 
   return (
-    <HeroSection post={latest}>
-      <LatestPost latestPost={latest} />
-    </HeroSection>
+    <>
+      <HeroSection post={latest}>
+        <LatestPost latestPost={latest} />
+      </HeroSection>
+      {posts && posts.length > 1 && <Carousel posts={posts.slice(1)} />}
+    </>
   );
 };
 
