@@ -2,8 +2,8 @@
 
 import HeroSection from "@/components/HeroSection";
 import { usePostsStore } from "../../store/postsStore";
-import LatestPost from "./LatestSection";
 import { Post } from "@/app/api/posts/postSchema";
+import LatestPost from "./LatestSection";
 
 type HomeProps = {
   postsData: Post[] | null;

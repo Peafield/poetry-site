@@ -31,23 +31,23 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className="bg-scrim-dark absolute z-10 w-dvw h-16">
-      <div className="flex items-center justify-between p-4">
+    <nav className="inset-0 absolute z-10 h-16 w-full">
+      <div className="flex items-center justify-between p-4 pb-2 bg-primary drop-shadow-md">
         <div>
           <Link href="/">
-            <h1 className="font-playfair_display mobile:text-xl md:text-3xl text-primary hover:text-secondary">
+            <h1 className="font-playfair_display font-medium mobile:text-xl md:text-3xl hover:underline">
               Wendi&apos;s Worminghall Whimsies
             </h1>
           </Link>
         </div>
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex space-x-16">
           <Link href="/about">
-            <h2 className="font-playfair_display text-2xl text-primary hover:text-secondary">
+            <h2 className="font-playfair_display font-medium text-2xl hover:underline">
               About
             </h2>
           </Link>
           <Link href="/poems">
-            <h2 className="font-playfair_display text-2xl text-primary hover:text-secondary">
+            <h2 className="font-playfair_display font-medium text-2xl  hover:underline">
               Poems
             </h2>
           </Link>
@@ -56,13 +56,24 @@ const Navbar = () => {
           <button
             ref={buttonRef}
             onClick={toggleMenu}
-            className="text-primary focus:outline-none hover:text-secondary"
+            className="focus:outline-none"
           >
-            {isOpen ? (
-              <CloseIcon className="w-6 h-6" />
-            ) : (
-              <BurgerIcon className="w-6 h-6" />
-            )}
+            <div className="relative w-6 h-6">
+              <div
+                className={`absolute inset-0 transform transition-all duration-500 ease-in-out ${
+                  isOpen ? "rotate-180 opacity-0" : "rotate-0 opacity-100"
+                }`}
+              >
+                <BurgerIcon className="w-6 h-6" />
+              </div>
+              <div
+                className={`absolute inset-0 transform transition-all duration-500 ease-in-out ${
+                  isOpen ? "rotate-0 opacity-100" : "-rotate-180 opacity-0"
+                }`}
+              >
+                <CloseIcon className="w-6 h-6" />
+              </div>
+            </div>
           </button>
         </div>
       </div>
@@ -72,7 +83,8 @@ const Navbar = () => {
     md:hidden
     flex flex-col 
     float-end 
-    bg-scrim-dark 
+    bg-primary
+    bg-opacity-95
     rounded-bl-xl 
     p-4
     transform
@@ -86,14 +98,14 @@ const Navbar = () => {
         <div className="space-y-4 sm:px-3">
           <div>
             <Link href="/about">
-              <h2 className="font-playfair_display text-xl text-primary hover:text-secondary">
+              <h2 className="font-playfair_display text-xl hover:underline">
                 About
               </h2>
             </Link>
           </div>
           <div>
             <Link href="/poems">
-              <h2 className="font-playfair_display text-xl text-primary hover:text-secondary">
+              <h2 className="font-playfair_display text-xl hover:underline">
                 Poems
               </h2>
             </Link>

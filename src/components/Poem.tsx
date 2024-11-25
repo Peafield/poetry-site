@@ -14,16 +14,16 @@ const Poem = ({ id }: PoemProps) => {
   return (
     post && (
       <>
-        <HeroSection post={post} className="!h-2/5">
-          <div className="absolute top-16 left-0 right-0 bottom-0 flex items-center justify-center rounded-b-[32px] bg-scrim-dark pb-20">
-            <h1 className="font-playfair_display font-medium mobile:text-6xl md:text-7xl text-white text-center">
+        <HeroSection post={post}>
+          <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-scrim-light pb-20">
+            <h1 className="font-playfair_display font-black mobile:text-6xl md:text-7xl text-white text-center">
               {post.title}
             </h1>
           </div>
         </HeroSection>
-        <div className="relative flex flex-col items-center justify-center m-8 p-16 bg-white rounded-[32px] shadow-inner-lg">
-          <div className="absolute top-4 right-20">
-            <h3 className="font-playfair font-medium text-2xl text-black text-center">
+        <div className="relative flex flex-col items-center justify-center mobile:mt-4 md:m-8 mobile:p-16 md:p-32 bg-white rounded-[32px] shadow-inner-lg">
+          <div className="absolute mobile:top-2 mobile:right-10 md:top-4 md:right-20">
+            <h3 className="font-playfair_display font-medium text-2xl text-black text-center">
               {post.date}
             </h3>
           </div>

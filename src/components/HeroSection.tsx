@@ -12,7 +12,7 @@ const HeroSection = ({ children, post, className }: HeroSectionProps) => {
   return (
     <section
       className={clsx(
-        "mobile:h-[50dvh] md:h-[64dvh] rounded-b-[32px] bg-secondary inset-0 relative",
+        "mobile:h-[32dvh] md:h-[64dvh] mobile:mt-12 md:mt-12 w-screen rounded-2xl bg-secondary relative drop-shadow-lg",
         className
       )}
     >
@@ -20,11 +20,11 @@ const HeroSection = ({ children, post, className }: HeroSectionProps) => {
         <Image
           src={`/mockImages/${post.image_url}`}
           alt={`Image for ${post?.title}`}
-          fill
           placeholder="blur"
           blurDataURL={`/mockImages/${post.image_url}`}
           priority
-          className="rounded-b-[32px] object-cover"
+          fill
+          className="object-cover"
         />
       )}
       {children}
