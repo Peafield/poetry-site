@@ -20,7 +20,7 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
       tabIndex={0}
       onKeyDown={handleClick}
     >
-      <div className="w-full h-full flex items-center justify-center bg-scrim-light">
+      <div className="w-full h-full flex items-center justify-center">
         <div className="flex items-center justify-center w-full bg-secondary bg-opacity-35">
           <div className="flex flex-col gap-y-4">
             <h3 className="font-playfair font-semibold mobile:text-xl md:text-4xl text-white text-start">
