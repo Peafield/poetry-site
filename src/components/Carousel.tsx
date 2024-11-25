@@ -54,6 +54,14 @@ const Carousel = ({ posts }: CarouselProps) => {
               fill
               className="object-cover"
             />
+            <div className="absolute inset-0 flex items-center justify-center bg-scrim-dark">
+              <div className="flex flex-col items-center justify-center ">
+                <h2 className="font-lato text-4xl font-bold text-white">
+                  {post.title}
+                </h2>
+                <p className="font-playfair_display text-2xl text-white">{`"${post.preview_text}"`}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

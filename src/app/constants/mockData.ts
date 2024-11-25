@@ -33,4 +33,14 @@ export const MOCK_DATA: Post[] = [
     image_url: "summer.png",
     date: "2024-08-01",
   },
+  {
+    id: "4",
+    title: "Spring",
+    preview_text:
+      "Spring is a lovely reminder of how beautiful change can truly be...",
+    content_text:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Tempor velit ridiculus, arcu imperdiet blandit malesuada. Laoreet nascetur metus platea tempor curabitur platea nascetur condimentum. Conubia luctus est nunc elementum curabitur tempor bibendum. Vel curae pharetra purus netus in nunc.",
+    image_url: "spring.png",
+    date: "2024-05-01",
+  },
 ];
