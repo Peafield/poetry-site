@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Playfair, Playfair_Display } from "next/font/google";
+import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const playfair = Playfair({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-playfair",
-});
 
 const playfair_display = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-playfair-display",
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-lato",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -29,11 +30,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${playfair_display.variable}`}
+      className={`${playfair_display.variable} ${lato.variable} h-full w-full scroll-smooth`}
     >
-      <body className="flex flex-col items-center justify-center m min-h-screen bg-primary mobile:mx-2 mobile:mt-4 md:mx-8 md:mt-8">
+      <body className="flex flex-col min-h-screen w-full">
         <Navbar />
-        <main>{children}</main>
+        <main className="flex-grow w-full">{children}</main>
         <Footer />
       </body>
     </html>

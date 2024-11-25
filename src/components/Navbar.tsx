@@ -31,8 +31,8 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className="inset-0 absolute z-10 h-16 w-full">
-      <div className="flex items-center justify-between p-4 pb-2 bg-primary drop-shadow-md">
+    <nav className="fixed top-0 left-0 right-0 z-10 h-16 w-full">
+      <div className="flex items-center justify-between p-4 pb-2 bg-primary bg-opacity-35 drop-shadow-md">
         <div>
           <Link href="/">
             <h1 className="font-playfair_display font-medium mobile:text-xl md:text-3xl hover:underline">

@@ -1,5 +1,6 @@
 import { Post } from "@/app/api/posts/postSchema";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type LastestPostProps = {
   latestPost?: Post | null;
@@ -7,6 +8,11 @@ type LastestPostProps = {
 
 const LatestPost = ({ latestPost }: LastestPostProps) => {
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleClick = () => {
     router.push(`/poem/${latestPost?.id}`);
@@ -14,25 +20,37 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
 
   return (
     <div
-      className="relative h-full cursor-pointer"
+      className={`relative h-full cursor-pointer transition-opacity duration-700 ease-in-out ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
       onClick={handleClick}
       role="link"
       tabIndex={0}
       onKeyDown={handleClick}
     >
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="flex items-center justify-center w-full bg-secondary bg-opacity-35">
-          <div className="flex flex-col gap-y-4">
-            <h3 className="font-playfair font-semibold mobile:text-xl md:text-4xl text-white text-start">
-              Latest
-            </h3>
-            <h2 className="font-playfair_display font-black mobile:text-3xl md:text-5xl text-white text-start">
-              {latestPost?.title}
-            </h2>
-            <div className="flex items-center justify-center w-1/3">
-              <h3 className="font-playfair mobile:text-xl md:text-5xl text-white text-start">
-                {`"${latestPost?.preview_text}"`}
-              </h3>
+      <div className="w-full h-full flex items-center justify-center bg-black bg-opacity-35">
+        <div
+          className={`w-full bg-white bg-opacity-95 transition-transform duration-700 ease-in-out ${
+            isVisible ? "translate-y-0" : "translate-y-10"
+          }`}
+        >
+          <div className="flex items-center justify-center w-full">
+            <div className="grid grid-cols-3 md:gap-x-16">
+              <div className="flex items-center justify-center">
+                <h3 className="font-playfair_display md:text-3xl">
+                  Latest Poem
+                </h3>
+              </div>
+              <div className="flex items-center justify-center">
+                <h2 className="font-lato font-bold text-center md:text-7xl">
+                  {latestPost?.title}
+                </h2>
+              </div>
+              <div className="flex items-center justify-center md:p-4">
+                <h3 className="font-playfair_display text-center md:text-2xl">
+                  {`"${latestPost?.preview_text}"`}
+                </h3>
+              </div>
             </div>
           </div>
         </div>

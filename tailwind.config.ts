@@ -16,8 +16,8 @@ export default {
         "scrim-light": "rgba(0, 0, 0, 0.32)",
       },
       fontFamily: {
-        playfair: "var(--font-playfair)",
         playfair_display: "var(--font-playfair-display)",
+        lato: "var(--font-lato)",
       },
       screens: {
         mobile: "400px",
