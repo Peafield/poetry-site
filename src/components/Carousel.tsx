@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ChevronLeftIcon from "./icons/ChevronLeftIcon";
 import ChevronRightIcon from "./icons/ChevronRightIcon";
+import { AUTO_SLIDE_INTERVAL } from "@/app/constants/constants";
 
 type CarouselProps = {
   posts: Post[];
@@ -32,6 +33,15 @@ const Carousel = ({ posts }: CarouselProps) => {
     }
   }, [currentIndex]);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % posts.length);
+    }, AUTO_SLIDE_INTERVAL);
+
+    // Cleanup on unmount
+    return () => clearInterval(timer);
+  }, [posts.length]);
+
   return (
     <div className="relative w-full overflow-hidden my-8">
       {/* Slide Container */}
@@ -54,7 +64,7 @@ const Carousel = ({ posts }: CarouselProps) => {
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-scrim-dark">
+            <div className="absolute inset-0 flex items-center justify-center  bg-gray-900 bg-opacity-35">
               <div className="flex flex-col items-center justify-center ">
                 <h2 className="font-lato text-4xl font-bold text-white">
                   {post.title}

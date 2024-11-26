@@ -23,7 +23,7 @@ const Poem = ({ id }: PoemProps) => {
       <>
         <HeroSection post={post}>
           <div
-            className={`absolute inset-0 flex items-center justify-center rounded-2xl bg-scrim-light pb-20 transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 flex items-center justify-center rounded-2xl bg-gray-900 bg-opacity-35 pb-20 transition-opacity duration-700 ease-in-out ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
           >

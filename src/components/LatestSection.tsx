@@ -28,7 +28,7 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
       tabIndex={0}
       onKeyDown={handleClick}
     >
-      <div className="w-full h-full flex items-center justify-center bg-scrim-dark">
+      <div className="w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-35">
         <div
           className={`w-full transition-transform duration-700 ease-in-out ${
             isVisible ? "translate-y-0" : "translate-y-10"

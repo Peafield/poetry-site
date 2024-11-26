@@ -1,0 +1,1 @@
+export const AUTO_SLIDE_INTERVAL = 5000;

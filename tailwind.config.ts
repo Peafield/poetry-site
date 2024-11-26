@@ -12,8 +12,6 @@ export default {
       colors: {
         primary: "#F0C1E1",
         secondary: "#CB9DF0",
-        "scrim-dark": "rgba(0, 0, 0, 0.64)",
-        "scrim-light": "rgba(0, 0, 0, 0.32)",
       },
       fontFamily: {
         playfair_display: "var(--font-playfair-display)",
