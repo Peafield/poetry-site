@@ -5,6 +5,7 @@ import { usePostsStore } from "../../store/postsStore";
 import { Post } from "@/app/api/posts/postSchema";
 import LatestPost from "./LatestSection";
 import Carousel from "./Carousel";
+import SectionHeading from "./SectionHeading";
 
 type HomeProps = {
   postsData: Post[] | null;
@@ -23,10 +24,11 @@ const Home = ({ postsData }: HomeProps) => {
 
   return (
     <>
+      <SectionHeading text="Latest Poem" />
       <HeroSection post={latest}>
         <LatestPost latestPost={latest} />
       </HeroSection>
-      <h2 className="my-8 text-center text-4xl font-bold">More Poems</h2>
+      <SectionHeading text="More Poems" />
       {posts && posts.length > 1 && <Carousel posts={posts.slice(1)} />}
     </>
   );

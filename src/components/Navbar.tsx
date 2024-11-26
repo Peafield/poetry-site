@@ -31,7 +31,7 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-10 h-16 w-full">
+    <nav className="fixed inset-x-0 top-0 z-10 w-full">
       <div className="flex items-center justify-between bg-primary/95 p-4 pb-2 drop-shadow-md">
         <div>
           <Link href="/">

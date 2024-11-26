@@ -12,6 +12,7 @@ export default {
       colors: {
         primary: "#F0C1E1",
         secondary: "#CB9DF0",
+        tertiary: "#FDDBBB",
       },
       fontFamily: {
         playfair_display: "var(--font-playfair-display)",

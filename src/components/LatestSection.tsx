@@ -35,19 +35,14 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
           }`}
         >
           <div className="flex w-full items-center justify-center">
-            <div className="grid grid-cols-3 md:gap-x-16">
+            <div className="grid grid-cols-2 md:gap-x-16">
               <div className="flex items-center justify-center">
-                <h3 className="font-playfair_display text-white md:text-3xl">
-                  Latest Poem
-                </h3>
-              </div>
-              <div className="flex items-center justify-center">
-                <h2 className="text-center font-lato font-bold text-white md:text-7xl">
+                <h2 className="text-center font-lato font-bold text-white mobile:text-4xl md:text-7xl">
                   {latestPost?.title}
                 </h2>
               </div>
-              <div className="flex items-center justify-center md:p-4">
-                <h3 className="text-center font-playfair_display text-white md:text-2xl">
+              <div className="flex items-center justify-center rounded-l-lg bg-white/80 p-4">
+                <h3 className="text-center font-playfair_display font-medium text-black md:text-4xl">
                   {`"${latestPost?.preview_text}"`}
                 </h3>
               </div>

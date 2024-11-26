@@ -12,7 +12,7 @@ const HeroSection = ({ children, post, className }: HeroSectionProps) => {
   return (
     <section
       className={clsx(
-        "relative mt-16 w-full rounded-2xl mobile:h-[32dvh] md:h-[64dvh]",
+        "relative mb-4 w-full rounded-2xl mobile:h-[32dvh] md:h-[64dvh]",
         className
       )}
     >

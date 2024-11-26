@@ -43,7 +43,7 @@ const Carousel = ({ posts }: CarouselProps) => {
   }, [posts.length]);
 
   return (
-    <div className="relative my-8 w-full overflow-hidden">
+    <div className="relative my-4 w-full overflow-hidden">
       {/* Slide Container */}
       <div
         ref={slidesRef}
@@ -65,11 +65,11 @@ const Carousel = ({ posts }: CarouselProps) => {
               className="object-cover"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-gray-900/35">
-              <div className="flex flex-col items-center justify-center ">
-                <h2 className="font-lato text-4xl font-bold text-white">
+              <div className="flex flex-col items-center justify-center gap-y-2">
+                <h2 className="font-lato font-bold text-white mobile:text-2xl md:text-4xl">
                   {post.title}
                 </h2>
-                <p className="font-playfair_display text-2xl text-white">{`"${post.preview_text}"`}</p>
+                <p className="mobile:text:xl w-1/2 font-playfair_display font-medium text-white md:text-2xl">{`"${post.preview_text}"`}</p>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@ const Carousel = ({ posts }: CarouselProps) => {
           className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-white hover:animate-pulse"
           onClick={prevSlide}
         >
-          <ChevronLeftIcon className="size-16" />
+          <ChevronLeftIcon className="mobile:size-8 md:size-16" />
         </button>
       )}
       {!endOfSlides && (
@@ -90,7 +90,7 @@ const Carousel = ({ posts }: CarouselProps) => {
           className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white hover:animate-pulse"
           onClick={nextSlide}
         >
-          <ChevronRightIcon className="size-16" />
+          <ChevronRightIcon className="mobile:size-8 md:size-16" />
         </button>
       )}
     </div>
