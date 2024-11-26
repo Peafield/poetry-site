@@ -21,6 +21,7 @@ const About = () => {
                 blurDataURL="/profile-pic.jpeg"
                 priority
                 fill
+                sizes="100%"
                 className="rounded-full object-cover shadow-xl"
               />
             </div>

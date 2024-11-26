@@ -46,9 +46,9 @@ const Navbar = () => {
               About
             </h2>
           </Link>
-          <Link href="/poems">
+          <Link href="/archive">
             <h2 className="font-playfair_display text-2xl font-medium  hover:underline">
-              Poems
+              Archive
             </h2>
           </Link>
         </div>
@@ -102,9 +102,9 @@ const Navbar = () => {
             </Link>
           </div>
           <div>
-            <Link href="/poems">
+            <Link href="/archive">
               <h2 className="font-playfair_display text-xl hover:underline">
-                Poems
+                Archive
               </h2>
             </Link>
           </div>

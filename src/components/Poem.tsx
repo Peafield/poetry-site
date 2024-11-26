@@ -17,7 +17,6 @@ const Poem = ({ id }: PoemProps) => {
     setIsVisible(true);
   }, []);
 
-  console.log(post);
   return (
     post && (
       <>
@@ -27,14 +26,14 @@ const Poem = ({ id }: PoemProps) => {
               isVisible ? "opacity-100" : "opacity-0"
             }`}
           >
-            <h1 className="text-center font-lato font-black text-white mobile:text-6xl md:text-7xl">
+            <h1 className="text-center font-lato font-black text-white mobile:text-3xl md:text-7xl">
               {post.title}
             </h1>
           </div>
         </HeroSection>
         <div className="relative flex flex-col items-center justify-center rounded-[32px] bg-white shadow-inner-lg mobile:m-4 mobile:p-16 md:m-8 md:p-32">
           <div className="absolute mobile:right-10 mobile:top-2 md:right-20 md:top-4">
-            <h3 className="text-center font-lato text-2xl font-medium text-black">
+            <h3 className="text-center font-lato font-medium text-black md:text-2xl">
               {post.date}
             </h3>
           </div>

@@ -24,6 +24,7 @@ const HeroSection = ({ children, post, className }: HeroSectionProps) => {
           blurDataURL={`/mockImages/${post.image_url}`}
           priority
           fill
+          sizes="100%"
           className="object-cover"
         />
       )}
