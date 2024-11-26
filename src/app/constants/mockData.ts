@@ -41,6 +41,6 @@ export const MOCK_DATA: Post[] = [
     content_text:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Tempor velit ridiculus, arcu imperdiet blandit malesuada. Laoreet nascetur metus platea tempor curabitur platea nascetur condimentum. Conubia luctus est nunc elementum curabitur tempor bibendum. Vel curae pharetra purus netus in nunc.",
     image_url: "spring.png",
-    date: "2024-05-01",
+    date: "2024-12-01",
   },
 ];
