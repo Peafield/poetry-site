@@ -1,13 +1,14 @@
 import { ABOUT_ME_TEXT } from "@/app/constants/constants";
 import HeroSection from "./HeroSection";
 import Image from "next/image";
+import ContentCard from "./ContentCard";
 
 const About = () => {
   return (
     <>
       <HeroSection className="flex items-center justify-center">
-        <div className="grid grid-cols-2 mobile:gap-x-4 md:gap-x-8">
-          <div className="flex size-full items-center justify-center">
+        <div className="grid w-full grid-cols-2 bg-tertiary mobile:gap-x-4 md:gap-x-8">
+          <div className="flex size-full items-center justify-end">
             <h1 className="text-center font-bold mobile:text-4xl md:text-6xl">
               About Me
             </h1>
@@ -28,13 +29,7 @@ const About = () => {
           </div>
         </div>
       </HeroSection>
-      <div className="relative flex flex-col items-center justify-center rounded-[32px] bg-white shadow-inner-lg mobile:m-4 mobile:p-16 md:m-8 md:p-32">
-        <div className="space-y-4 text-justify font-lato font-medium leading-relaxed tracking-wide text-black md:text-2xl">
-          {ABOUT_ME_TEXT.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </div>
-      </div>
+      <ContentCard content_text={ABOUT_ME_TEXT} />
     </>
   );
 };

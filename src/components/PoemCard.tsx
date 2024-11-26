@@ -22,7 +22,7 @@ const PoemCard = ({ post }: PoemCardProps) => {
           router.push(`/poem/${post.id}`);
         }
       }}
-      className="group relative flex h-[400px] w-80 cursor-pointer flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
+      className="group relative flex h-[400px] w-80 cursor-pointer flex-col overflow-hidden rounded-2xl bg-stone-100 shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
     >
       <div className="relative h-1/2 w-full">
         <Image
@@ -37,16 +37,16 @@ const PoemCard = ({ post }: PoemCardProps) => {
       </div>
 
       <div className="flex h-1/2 flex-col gap-4 p-6 ">
-        <h2 className="font-playfair_display text-2xl font-bold tracking-tight text-gray-800">
+        <h2 className="font-playfair_display text-2xl font-bold tracking-tight text-gray-900">
           {post.title}
         </h2>
-        <p className="line-clamp-3 text-gray-600">{post.preview_text}</p>
+        <p className="line-clamp-3 text-gray-800">{post.preview_text}</p>
         <div className="mt-auto flex items-center justify-between">
-          <span className="text-sm font-medium text-gray-500">
+          <span className="text-sm font-medium text-gray-800">
             {new Date(post.date).toLocaleDateString()}
           </span>
           <button
-            className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition-all duration-200 ease-in-out hover:bg-secondary"
+            className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 ease-in-out hover:bg-secondary"
             onClick={(e) => {
               e.stopPropagation();
               router.push(`/poem/${post.id}`);

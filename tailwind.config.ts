@@ -13,6 +13,7 @@ export default {
         primary: "#F0C1E1",
         secondary: "#CB9DF0",
         tertiary: "#FDDBBB",
+        accent: "#FFF9BF",
       },
       fontFamily: {
         playfair_display: "var(--font-playfair-display)",
