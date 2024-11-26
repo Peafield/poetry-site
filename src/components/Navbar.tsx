@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed inset-x-0 top-0 z-10 w-full">
-      <div className="flex items-center justify-between bg-primary/95 p-4 pb-2 drop-shadow-md">
+      <div className="flex items-center justify-between bg-primary/95 p-4 drop-shadow-md">
         <div>
           <Link href="/">
             <h1 className="font-playfair_display font-medium hover:underline mobile:text-xl md:text-3xl">
