@@ -41,8 +41,8 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
                   {latestPost?.title}
                 </h2>
               </div>
-              <div className="flex items-center justify-center rounded-l-lg bg-white/80 p-4">
-                <h3 className="text-center font-playfair_display font-medium text-black md:text-4xl">
+              <div className="flex items-center justify-center rounded-l-lg bg-gray-900/35 p-4">
+                <h3 className="text-center font-playfair_display font-medium leading-relaxed text-white md:text-4xl">
                   {`"${latestPost?.preview_text}"`}
                 </h3>
               </div>

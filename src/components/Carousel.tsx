@@ -76,10 +76,10 @@ const Carousel = ({ posts }: CarouselProps) => {
             />
             <div className="absolute inset-0 flex items-center justify-center bg-gray-900/35">
               <div className="flex flex-col items-center justify-center gap-y-2">
-                <h2 className="font-lato font-bold text-white mobile:text-2xl md:text-4xl">
+                <h2 className="text-center font-lato font-bold text-white mobile:text-2xl md:text-4xl">
                   {post.title}
                 </h2>
-                <p className="w-1/2 font-playfair_display font-medium text-white mobile:text-xl md:text-2xl">{`"${post.preview_text}"`}</p>
+                <p className="w-1/2 text-center font-playfair_display font-medium leading-relaxed text-white  mobile:text-xl md:text-2xl">{`"${post.preview_text}"`}</p>
               </div>
             </div>
           </div>
