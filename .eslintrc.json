@@ -3,7 +3,8 @@
     "next/core-web-vitals",
     "next/typescript",
     "prettier",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "plugin:tailwindcss/recommended"
   ],
   "plugins": ["jsx-a11y"]
 }

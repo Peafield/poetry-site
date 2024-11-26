@@ -43,7 +43,7 @@ const Carousel = ({ posts }: CarouselProps) => {
   }, [posts.length]);
 
   return (
-    <div className="relative w-full overflow-hidden my-8">
+    <div className="relative my-8 w-full overflow-hidden">
       {/* Slide Container */}
       <div
         ref={slidesRef}
@@ -53,7 +53,7 @@ const Carousel = ({ posts }: CarouselProps) => {
         {posts.map((post, index) => (
           <div
             key={index}
-            className="w-full mobile:h-[32dvh] md:h-[64dvh] relative"
+            className="relative w-full mobile:h-[32dvh] md:h-[64dvh]"
           >
             <Image
               src={`/mockImages/${post.image_url}`}
@@ -64,7 +64,7 @@ const Carousel = ({ posts }: CarouselProps) => {
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center  bg-gray-900 bg-opacity-35">
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-900/35">
               <div className="flex flex-col items-center justify-center ">
                 <h2 className="font-lato text-4xl font-bold text-white">
                   {post.title}
@@ -79,18 +79,18 @@ const Carousel = ({ posts }: CarouselProps) => {
       {/* Navigation */}
       {currentIndex > 0 && (
         <button
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white p-2 hover:animate-pulse"
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-white hover:animate-pulse"
           onClick={prevSlide}
         >
-          <ChevronLeftIcon className="h-16 w-16" />
+          <ChevronLeftIcon className="size-16" />
         </button>
       )}
       {!endOfSlides && (
         <button
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white p-2 hover:animate-pulse"
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white hover:animate-pulse"
           onClick={nextSlide}
         >
-          <ChevronRightIcon className="h-16 w-16" />
+          <ChevronRightIcon className="size-16" />
         </button>
       )}
     </div>

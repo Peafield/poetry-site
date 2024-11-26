@@ -26,7 +26,7 @@ const Home = ({ postsData }: HomeProps) => {
       <HeroSection post={latest}>
         <LatestPost latestPost={latest} />
       </HeroSection>
-      <h2 className="text-4xl font-bold text-center my-8">More Poems</h2>
+      <h2 className="my-8 text-center text-4xl font-bold">More Poems</h2>
       {posts && posts.length > 1 && <Carousel posts={posts.slice(1)} />}
     </>
   );

@@ -23,22 +23,22 @@ const Poem = ({ id }: PoemProps) => {
       <>
         <HeroSection post={post}>
           <div
-            className={`absolute inset-0 flex items-center justify-center rounded-2xl bg-gray-900 bg-opacity-35 pb-20 transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 flex items-center justify-center rounded-2xl bg-gray-900/35 pb-20 transition-opacity duration-700 ease-in-out ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
           >
-            <h1 className="font-lato font-black mobile:text-6xl md:text-7xl text-white text-center">
+            <h1 className="text-center font-lato font-black text-white mobile:text-6xl md:text-7xl">
               {post.title}
             </h1>
           </div>
         </HeroSection>
-        <div className="relative flex flex-col items-center justify-center mobile:mt-4 md:m-8 mobile:p-16 md:p-32 bg-white rounded-[32px] shadow-inner-lg">
-          <div className="absolute mobile:top-2 mobile:right-10 md:top-4 md:right-20">
-            <h3 className="font-lato font-medium text-2xl text-black text-center">
+        <div className="relative flex flex-col items-center justify-center rounded-[32px] bg-white shadow-inner-lg mobile:mt-4 mobile:p-16 md:m-8 md:p-32">
+          <div className="absolute mobile:right-10 mobile:top-2 md:right-20 md:top-4">
+            <h3 className="text-center font-lato text-2xl font-medium text-black">
               {post.date}
             </h3>
           </div>
-          <p className="font- font-medium text-2xl text-black text-center">
+          <p className="text-center font-lato text-2xl font-medium text-black">
             {post.content_text}
           </p>
         </div>

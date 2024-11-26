@@ -28,26 +28,26 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
       tabIndex={0}
       onKeyDown={handleClick}
     >
-      <div className="w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-35">
+      <div className="flex size-full items-center justify-center bg-gray-900/35">
         <div
           className={`w-full transition-transform duration-700 ease-in-out ${
             isVisible ? "translate-y-0" : "translate-y-10"
           }`}
         >
-          <div className="flex items-center justify-center w-full">
+          <div className="flex w-full items-center justify-center">
             <div className="grid grid-cols-3 md:gap-x-16">
               <div className="flex items-center justify-center">
-                <h3 className="font-playfair_display md:text-3xl text-white">
+                <h3 className="font-playfair_display text-white md:text-3xl">
                   Latest Poem
                 </h3>
               </div>
               <div className="flex items-center justify-center">
-                <h2 className="font-lato font-bold text-center md:text-7xl text-white">
+                <h2 className="text-center font-lato font-bold text-white md:text-7xl">
                   {latestPost?.title}
                 </h2>
               </div>
               <div className="flex items-center justify-center md:p-4">
-                <h3 className="font-playfair_display text-center md:text-2xl text-white">
+                <h3 className="text-center font-playfair_display text-white md:text-2xl">
                   {`"${latestPost?.preview_text}"`}
                 </h3>
               </div>

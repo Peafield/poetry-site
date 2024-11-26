@@ -30,11 +30,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair_display.variable} ${lato.variable} h-full w-full scroll-smooth`}
+      className={`${playfair_display.variable} ${lato.variable} size-full scroll-smooth`}
     >
-      <body className="flex flex-col min-h-screen w-full bg-primary">
+      <body className="flex min-h-screen w-full flex-col bg-primary">
         <Navbar />
-        <main className="flex-grow w-full">{children}</main>
+        <main className="w-full grow">{children}</main>
         <Footer />
       </body>
     </html>
