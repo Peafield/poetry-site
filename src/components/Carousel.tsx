@@ -6,12 +6,14 @@ import { useEffect, useRef, useState } from "react";
 import ChevronLeftIcon from "./icons/ChevronLeftIcon";
 import ChevronRightIcon from "./icons/ChevronRightIcon";
 import { AUTO_SLIDE_INTERVAL } from "@/app/constants/constants";
+import { useRouter } from "next/navigation";
 
 type CarouselProps = {
   posts: Post[];
 };
 
 const Carousel = ({ posts }: CarouselProps) => {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const slidesRef = useRef<HTMLDivElement>(null);
   const endOfSlides = posts.length - 1 === currentIndex;
@@ -42,12 +44,20 @@ const Carousel = ({ posts }: CarouselProps) => {
     return () => clearInterval(timer);
   }, [posts.length]);
 
+  const handleClick = () => {
+    router.push(`/poem/${posts[currentIndex].id}`);
+  };
+
   return (
     <div className="relative my-4 w-full overflow-hidden">
       {/* Slide Container */}
       <div
         ref={slidesRef}
-        className="flex transition-transform duration-500 ease-in-out"
+        onClick={handleClick}
+        role="link"
+        tabIndex={0}
+        onKeyDown={handleClick}
+        className="flex cursor-pointer transition-transform duration-500 ease-in-out"
         style={{ width: `${posts.length * 100}%` }}
       >
         {posts.map((post, index) => (
@@ -69,7 +79,7 @@ const Carousel = ({ posts }: CarouselProps) => {
                 <h2 className="font-lato font-bold text-white mobile:text-2xl md:text-4xl">
                   {post.title}
                 </h2>
-                <p className="mobile:text:xl w-1/2 font-playfair_display font-medium text-white md:text-2xl">{`"${post.preview_text}"`}</p>
+                <p className="w-1/2 font-playfair_display font-medium text-white mobile:text-xl md:text-2xl">{`"${post.preview_text}"`}</p>
               </div>
             </div>
           </div>
