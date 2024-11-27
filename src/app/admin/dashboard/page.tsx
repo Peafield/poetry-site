@@ -1,3 +1,4 @@
+import Dashboard from "@/components/Dashboard/Dashboard";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -18,7 +19,7 @@ export default async function DashboardPage() {
     jwt.verify(token, JWT_SECRET);
 
     // If valid, return the admin dashboard
-    return <h1>Admin Dashboard</h1>;
+    return <Dashboard />;
   } catch (err) {
     console.error(err);
     // If invalid, redirect to login

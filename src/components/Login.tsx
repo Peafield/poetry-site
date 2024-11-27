@@ -86,6 +86,7 @@ const Login = () => {
               id="password"
               className="w-full rounded-md bg-stone-200 px-4 py-2 text-gray-800"
               {...register("password", { required: "Password is required" })}
+              autoComplete="current-password"
             />
             {errors.password && (
               <p className="mt-1 text-sm text-red-600">
