@@ -45,7 +45,7 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
     },
     editorProps: {
       attributes: {
-        class: "max-w-full h-full focus:outline-primary/35 p-4",
+        class: "max-w-full h-full focus:outline-primary/35 p-4 break-words",
       },
     },
     immediatelyRender: false,
@@ -64,8 +64,8 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center p-4">
-      <div className="mb-8 flex w-fit flex-wrap gap-2 rounded border p-2 shadow-lg">
+    <div className="flex size-full flex-col items-center p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded border p-2 shadow-lg">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={`mr-2 px-2 py-1 ${
@@ -146,7 +146,10 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
           className="w-full rounded border p-4 font-lato focus:outline-primary/35"
         />
       </div>
-      <EditorContent editor={editor} className="w-full flex-1 rounded border" />
+      <EditorContent
+        editor={editor}
+        className="size-full whitespace-pre-wrap break-words rounded border"
+      />
     </div>
   );
 };

@@ -1,9 +1,12 @@
+import clsx from "clsx";
+
 type ContentCardProps = {
   content_text: string;
   date?: string;
+  className?: string;
 };
 
-const ContentCard = ({ content_text, date }: ContentCardProps) => {
+const ContentCard = ({ content_text, date, className }: ContentCardProps) => {
   const isHTML = (str: string) => {
     return /<[a-z][\s\S]*>/i.test(str);
   };
@@ -26,7 +29,12 @@ const ContentCard = ({ content_text, date }: ContentCardProps) => {
   };
 
   return (
-    <div className="relative flex flex-col rounded-[32px] bg-stone-50 shadow-lg mobile:m-4 mobile:p-16 md:m-8 md:p-32">
+    <div
+      className={clsx(
+        "relative m-4 flex flex-col rounded-[32px] bg-stone-50 p-8 shadow-lg",
+        className
+      )}
+    >
       {date && (
         <div className="absolute mobile:right-10 mobile:top-2 md:right-20 md:top-4">
           <h3 className="text-center font-lato font-medium text-black md:text-2xl">
