@@ -13,13 +13,15 @@ import { MdOutlineFormatAlignLeft } from "react-icons/md";
 import { MdOutlineFormatAlignCenter } from "react-icons/md";
 import { MdOutlineFormatAlignRight } from "react-icons/md";
 import { MdOutlineFormatAlignJustify } from "react-icons/md";
+import { MdOutlineSave } from "react-icons/md";
 
 interface TextEditorProps {
   content: string;
   setContent: (content: string) => void;
+  handleSave: () => void;
 }
 
-const TextEditor = ({ content, setContent }: TextEditorProps) => {
+const TextEditor = ({ content, setContent, handleSave }: TextEditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -43,8 +45,7 @@ const TextEditor = ({ content, setContent }: TextEditorProps) => {
     },
     editorProps: {
       attributes: {
-        class:
-          "max-w-full h-full focus:outline-none p-4 rounded-md border border-gray-300 shadow-sm",
+        class: "max-w-full h-full focus:outline-primary/35 p-4",
       },
     },
     immediatelyRender: false,
@@ -63,66 +64,79 @@ const TextEditor = ({ content, setContent }: TextEditorProps) => {
   }
 
   return (
-    <div className="flex flex-1 flex-col rounded border p-4">
-      <div className="mb-2 flex flex-wrap gap-2">
+    <div className="flex flex-1 flex-col items-center p-4 ">
+      <div className="mb-8 flex w-fit flex-wrap gap-2 rounded border p-2 shadow-lg">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={`mr-2 px-2 py-1 ${
-            editor.isActive("bold") ? "bg-gray-300" : ""
+            editor.isActive("bold") ? "rounded bg-secondary" : ""
           }`}
         >
-          <MdOutlineFormatBold />
+          <MdOutlineFormatBold className="size-6" />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={`mr-2 px-2 py-1 ${
-            editor.isActive("italic") ? "bg-gray-300" : ""
+            editor.isActive("italic") ? "rounded bg-secondary" : ""
           }`}
         >
-          <MdOutlineFormatItalic />
+          <MdOutlineFormatItalic className="size-6" />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           className={`mr-2 px-2 py-1 ${
-            editor.isActive("underline") ? "bg-gray-300" : ""
+            editor.isActive("underline") ? "rounded bg-secondary" : ""
           }`}
         >
-          <MdOutlineFormatUnderlined />
+          <MdOutlineFormatUnderlined className="size-6" />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           className={`mr-2 px-2 py-1 ${
-            editor.isActive({ textAlign: "left" }) ? "bg-gray-300" : ""
+            editor.isActive({ textAlign: "left" }) ? "rounded bg-secondary" : ""
           }`}
         >
-          <MdOutlineFormatAlignLeft />
+          <MdOutlineFormatAlignLeft className="size-6" />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           className={`mr-2 px-2 py-1 ${
-            editor.isActive({ textAlign: "center" }) ? "bg-gray-300" : ""
+            editor.isActive({ textAlign: "center" })
+              ? "rounded bg-secondary"
+              : ""
           }`}
         >
-          <MdOutlineFormatAlignCenter />
+          <MdOutlineFormatAlignCenter className="size-6" />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           className={`mr-2 px-2 py-1 ${
-            editor.isActive({ textAlign: "right" }) ? "bg-gray-300" : ""
+            editor.isActive({ textAlign: "right" })
+              ? "rounded bg-secondary"
+              : ""
           }`}
         >
-          <MdOutlineFormatAlignRight />
+          <MdOutlineFormatAlignRight className="size-6" />
         </button>
         <button
           onClick={() => editor.chain().focus().setTextAlign("justify").run()}
           className={`px-2 py-1 ${
-            editor.isActive({ textAlign: "justify" }) ? "bg-gray-300" : ""
+            editor.isActive({ textAlign: "justify" })
+              ? "rounded bg-secondary"
+              : ""
           }`}
         >
-          <MdOutlineFormatAlignJustify />
+          <MdOutlineFormatAlignJustify className="size-6" />
+        </button>
+        <button
+          onClick={handleSave}
+          className="flex flex-row items-center justify-center gap-x-2 rounded border p-2 hover:bg-secondary"
+        >
+          <p className="font-lato font-bold">Save</p>
+          <MdOutlineSave className="size-6" />
         </button>
       </div>
-      <EditorContent editor={editor} className="flex-1" />
+      <EditorContent editor={editor} className="w-full flex-1" />
     </div>
   );
 };

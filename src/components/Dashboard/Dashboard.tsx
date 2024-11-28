@@ -13,15 +13,15 @@ const Dashboard = () => {
 
   return (
     <div className="flex h-full flex-col items-center p-4">
-      <h1 className="mb-4 font-lato text-2xl font-bold">Poem Editor</h1>
-      <div className="flex flex-1 flex-col md:w-2/5">
-        <TextEditor content={content} setContent={setContent} />
-        <button
-          onClick={handleSave}
-          className="mt-4 rounded bg-blue-500 px-4 py-2 text-white"
-        >
-          Save Poem
-        </button>
+      <h1 className="mb-4 font-lato text-2xl font-bold">
+        Wendi&apos;s Poem Editor
+      </h1>
+      <div className="flex flex-1 flex-row lg:w-2/5">
+        <TextEditor
+          content={content}
+          setContent={setContent}
+          handleSave={handleSave}
+        />
       </div>
     </div>
   );
