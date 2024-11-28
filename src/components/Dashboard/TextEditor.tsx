@@ -34,7 +34,7 @@ const TextEditor = ({ content, setContent }: TextEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          "prose max-w-full h-full focus:outline-none p-4 bg-gray-100 rounded-md border border-gray-300 shadow-sm",
+          "max-w-full h-full focus:outline-none p-4 bg-gray-100 rounded-md border border-gray-300 shadow-sm",
       },
     },
   });
@@ -52,7 +52,7 @@ const TextEditor = ({ content, setContent }: TextEditorProps) => {
   }
 
   return (
-    <div className="flex h-full flex-col rounded border p-4">
+    <div className="flex flex-1 flex-col rounded border p-4">
       <div className="mb-2 flex flex-wrap gap-2">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}

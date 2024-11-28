@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair_display.variable} ${lato.variable} h-full scroll-smooth`}
     >
-      <body className="relative flex min-h-screen flex-col">
+      <body className="relative flex h-full flex-col">
         <Navbar />
         <main className="w-full flex-1 pt-16">{children}</main>
         <Footer />
