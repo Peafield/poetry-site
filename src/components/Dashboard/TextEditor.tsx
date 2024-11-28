@@ -23,7 +23,6 @@ interface TextEditorProps {
 
 const TextEditor = ({ handleSave }: TextEditorProps) => {
   const { newPost, setNewPost } = usePostsCreationStore();
-  console.log("NewPost", newPost);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -41,7 +40,6 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
       if (editor.isEmpty) {
         setNewPost({ ...newPost, content: "" });
       } else {
-        console.log(editor.isEmpty);
         setNewPost({ ...newPost, content: editor.getHTML() });
       }
     },
@@ -66,7 +64,7 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center p-4 ">
+    <div className="flex flex-1 flex-col items-center p-4">
       <div className="mb-8 flex w-fit flex-wrap gap-2 rounded border p-2 shadow-lg">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}

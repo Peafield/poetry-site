@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 
 const playfair_display = Playfair_Display({
   subsets: ["latin"],
@@ -35,7 +35,7 @@ export default function RootLayout({
       <body className="relative flex h-full flex-col">
         <Navbar />
         <main className="w-full flex-1 pt-16">{children}</main>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
