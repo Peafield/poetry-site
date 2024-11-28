@@ -23,6 +23,7 @@ interface TextEditorProps {
 
 const TextEditor = ({ handleSave }: TextEditorProps) => {
   const { newPost, setNewPost } = usePostsCreationStore();
+  console.log("NewPost", newPost);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -38,10 +39,10 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
     content: newPost.content,
     onUpdate: ({ editor }) => {
       if (editor.isEmpty) {
-        setNewPost({ content: "" });
+        setNewPost({ ...newPost, content: "" });
       } else {
         console.log(editor.isEmpty);
-        setNewPost({ content: editor.getHTML() });
+        setNewPost({ ...newPost, content: editor.getHTML() });
       }
     },
     editorProps: {
@@ -141,8 +142,8 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
         {/* FIX ME!! */}
         <input
           type="text"
-          value={newPost.title}
-          onChange={(e) => setNewPost({ title: e.target.value })}
+          value={newPost.title || ``}
+          onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
           placeholder="Enter poem title..."
           className="w-full rounded border p-4 font-lato focus:outline-primary/35"
         />
