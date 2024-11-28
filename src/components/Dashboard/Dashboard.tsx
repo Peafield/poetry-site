@@ -1,14 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { PostCreation } from "@/types/posts";
 import TextEditor from "./TextEditor";
 
 const Dashboard = () => {
-  const [content, setContent] = useState("");
-
-  const handleSave = () => {
+  const handleSave = (newPost: PostCreation) => {
     // Implement your save logic here
-    console.log("Saved content:", content);
+    console.log("Saved content:", newPost);
   };
 
   return (
@@ -16,12 +14,9 @@ const Dashboard = () => {
       <h1 className="mb-4 font-lato text-2xl font-bold">
         Wendi&apos;s Poem Editor
       </h1>
+
       <div className="flex flex-1 flex-row lg:w-2/5">
-        <TextEditor
-          content={content}
-          setContent={setContent}
-          handleSave={handleSave}
-        />
+        <TextEditor handleSave={handleSave} />
       </div>
     </div>
   );

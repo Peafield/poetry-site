@@ -1,4 +1,5 @@
 import { Post } from "@/app/api/posts/postSchema";
+import { PostCreation } from "@/types/posts";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -32,3 +33,21 @@ export const usePostsStore = create<PostsState>()(
     }
   )
 );
+
+interface PostsCreationState {
+  newPost: PostCreation;
+  setNewPost: (post: PostCreation) => void;
+}
+
+export const usePostsCreationStore = create<PostsCreationState>((set) => ({
+  newPost: {
+    title: "",
+    date: new Date(),
+    content: "",
+  },
+  setNewPost: (post) => {
+    set({
+      newPost: post,
+    });
+  },
+}));

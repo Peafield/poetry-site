@@ -14,14 +14,15 @@ import { MdOutlineFormatAlignCenter } from "react-icons/md";
 import { MdOutlineFormatAlignRight } from "react-icons/md";
 import { MdOutlineFormatAlignJustify } from "react-icons/md";
 import { MdOutlineSave } from "react-icons/md";
+import { PostCreation } from "@/types/posts";
+import { usePostsCreationStore } from "../../../store/postsStore";
 
 interface TextEditorProps {
-  content: string;
-  setContent: (content: string) => void;
-  handleSave: () => void;
+  handleSave: (newPost: PostCreation) => void;
 }
 
-const TextEditor = ({ content, setContent, handleSave }: TextEditorProps) => {
+const TextEditor = ({ handleSave }: TextEditorProps) => {
+  const { newPost, setNewPost } = usePostsCreationStore();
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -34,13 +35,13 @@ const TextEditor = ({ content, setContent, handleSave }: TextEditorProps) => {
         emptyNodeClass: "is-editor-empty",
       }),
     ],
-    content,
+    content: newPost.content,
     onUpdate: ({ editor }) => {
       if (editor.isEmpty) {
-        setContent("");
+        setNewPost({ content: "" });
       } else {
         console.log(editor.isEmpty);
-        setContent(editor.getHTML());
+        setNewPost({ content: editor.getHTML() });
       }
     },
     editorProps: {
@@ -129,14 +130,24 @@ const TextEditor = ({ content, setContent, handleSave }: TextEditorProps) => {
           <MdOutlineFormatAlignJustify className="size-6" />
         </button>
         <button
-          onClick={handleSave}
+          onClick={() => handleSave(newPost)}
           className="flex flex-row items-center justify-center gap-x-2 rounded border p-2 hover:bg-secondary"
         >
           <p className="font-lato font-bold">Save</p>
           <MdOutlineSave className="size-6" />
         </button>
       </div>
-      <EditorContent editor={editor} className="w-full flex-1" />
+      <div className="mb-4 w-full">
+        {/* FIX ME!! */}
+        <input
+          type="text"
+          value={newPost.title}
+          onChange={(e) => setNewPost({ title: e.target.value })}
+          placeholder="Enter poem title..."
+          className="w-full rounded border p-4 font-lato focus:outline-primary/35"
+        />
+      </div>
+      <EditorContent editor={editor} className="w-full flex-1 rounded border" />
     </div>
   );
 };
