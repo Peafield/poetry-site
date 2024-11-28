@@ -4,7 +4,7 @@ import { useState } from "react";
 import TextEditor from "./TextEditor";
 
 const Dashboard = () => {
-  const [content, setContent] = useState("<p>Start writing your poem...</p>");
+  const [content, setContent] = useState("");
 
   const handleSave = () => {
     // Implement your save logic here
@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className="flex h-full flex-col items-center p-4">
       <h1 className="mb-4 font-lato text-2xl font-bold">Poem Editor</h1>
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col md:w-3/5">
         <TextEditor content={content} setContent={setContent} />
         <button
           onClick={handleSave}

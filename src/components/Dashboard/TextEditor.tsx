@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
+import Placeholder from "@tiptap/extension-placeholder";
 import { useEffect } from "react";
 import { MdOutlineFormatBold } from "react-icons/md";
 import { MdOutlineFormatItalic } from "react-icons/md";
@@ -26,17 +27,27 @@ const TextEditor = ({ content, setContent }: TextEditorProps) => {
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
+      Placeholder.configure({
+        placeholder: "Write your poem here...",
+        emptyNodeClass: "is-editor-empty",
+      }),
     ],
     content,
     onUpdate: ({ editor }) => {
-      setContent(editor.getHTML());
+      if (editor.isEmpty) {
+        setContent("");
+      } else {
+        console.log(editor.isEmpty);
+        setContent(editor.getHTML());
+      }
     },
     editorProps: {
       attributes: {
         class:
-          "max-w-full h-full focus:outline-none p-4 bg-gray-100 rounded-md border border-gray-300 shadow-sm",
+          "max-w-full h-full focus:outline-none p-4 rounded-md border border-gray-300 shadow-sm",
       },
     },
+    immediatelyRender: false,
   });
 
   useEffect(() => {
