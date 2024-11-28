@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
       <h1 className="mb-4 font-lato text-2xl font-bold">Poem Editor</h1>
-      <div className="flex flex-col">
+      <div className="flex flex-1 flex-col">
         <TextEditor content={content} setContent={setContent} />
         <button
           onClick={handleSave}
