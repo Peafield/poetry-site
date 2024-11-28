@@ -12,15 +12,17 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="mx-auto max-w-4xl p-4">
-      <h1 className="mb-4 text-2xl font-bold">Poem Editor</h1>
-      <TextEditor content={content} setContent={setContent} />
-      <button
-        onClick={handleSave}
-        className="mt-4 rounded bg-blue-500 px-4 py-2 text-white"
-      >
-        Save Poem
-      </button>
+    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      <h1 className="mb-4 font-lato text-2xl font-bold">Poem Editor</h1>
+      <div className="flex flex-col">
+        <TextEditor content={content} setContent={setContent} />
+        <button
+          onClick={handleSave}
+          className="mt-4 rounded bg-blue-500 px-4 py-2 text-white"
+        >
+          Save Poem
+        </button>
+      </div>
     </div>
   );
 };

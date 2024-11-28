@@ -43,8 +43,6 @@ const Login = () => {
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
     }
   };
 
