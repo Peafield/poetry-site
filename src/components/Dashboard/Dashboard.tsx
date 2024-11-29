@@ -16,18 +16,19 @@ const Dashboard = () => {
   return (
     <div className="flex size-full items-center mobile:flex-col lg:flex-row">
       {/* TEXT EDITOR */}
-      <div className="flex size-full flex-col items-center p-4 mobile:min-h-screen mobile:w-full">
+      <div className="flex h-full max-w-prose flex-col items-center p-4 mobile:min-h-screen mobile:w-full">
         <h1 className="mb-4 font-lato text-2xl font-bold">
           Wendi&apos;s Poem Editor
         </h1>
-        <div className="flex size-full flex-row">
+        <div className="flex size-full">
           <TextEditor handleSave={handleSave} />
         </div>
       </div>
+
       {/* PREVIEW */}
-      <div className="flex h-full w-1/2 flex-col items-center p-4 mobile:min-h-screen mobile:w-full">
+      <div className="flex h-full max-w-prose flex-col items-center p-4 mobile:min-h-screen mobile:w-full">
         <h1 className="mb-4 font-lato text-2xl font-bold">Preview</h1>
-        <div className="flex size-full flex-row">
+        <div className="flex size-full">
           <div className="flex size-full flex-col rounded-lg border p-2">
             <HeroSection
               newPost={newPost}
@@ -50,7 +51,7 @@ const Dashboard = () => {
                     })
                   : "Date"
               }
-              className="m-4 h-full"
+              className="m-4 size-full"
             />
           </div>
         </div>

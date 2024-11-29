@@ -137,7 +137,6 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
         </button>
       </div>
       <div className="mb-4 w-full">
-        {/* FIX ME!! */}
         <input
           type="text"
           value={newPost.title || ``}
@@ -148,7 +147,7 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
       </div>
       <EditorContent
         editor={editor}
-        className="size-full whitespace-pre-wrap break-words rounded border"
+        className="w-full flex-1 overflow-hidden rounded border [&_.ProseMirror]:whitespace-pre-wrap [&_.ProseMirror]:break-words"
       />
     </div>
   );
