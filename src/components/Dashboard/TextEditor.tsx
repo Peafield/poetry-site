@@ -45,7 +45,7 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
     },
     editorProps: {
       attributes: {
-        class: "max-w-full h-full focus:outline-primary/35 p-4 break-words",
+        class: "max-w-full h-full focus:outline-primary/35 p-8 break-words",
       },
     },
     immediatelyRender: false,
