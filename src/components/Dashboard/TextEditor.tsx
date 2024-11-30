@@ -14,6 +14,7 @@ import { MdOutlineFormatAlignCenter } from "react-icons/md";
 import { MdOutlineFormatAlignRight } from "react-icons/md";
 import { MdOutlineFormatAlignJustify } from "react-icons/md";
 import { MdOutlineSave } from "react-icons/md";
+import { TbPhotoPlus } from "react-icons/tb";
 import { PostCreation } from "@/types/posts";
 import { usePostsCreationStore } from "../../../store/postsStore";
 
@@ -128,6 +129,20 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
         >
           <MdOutlineFormatAlignJustify className="size-6" />
         </button>
+        <label
+          htmlFor="fileInput"
+          className="flex cursor-pointer items-center justify-center rounded border p-2 hover:bg-secondary"
+        >
+          <TbPhotoPlus className="size-6" />
+        </label>
+        <input
+          id="fileInput"
+          type="file"
+          className="hidden"
+          onChange={(e) =>
+            setNewPost({ ...newPost, image: e.target.files?.[0] })
+          }
+        />
         <button
           onClick={() => handleSave(newPost)}
           className="flex flex-row items-center justify-center gap-x-2 rounded border p-2 hover:bg-secondary"
@@ -136,6 +151,7 @@ const TextEditor = ({ handleSave }: TextEditorProps) => {
           <MdOutlineSave className="size-6" />
         </button>
       </div>
+
       <div className="mb-4 w-full">
         <input
           type="text"
