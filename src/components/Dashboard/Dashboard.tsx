@@ -1,16 +1,30 @@
 "use client";
 
-import { PostCreation } from "@/types/posts";
 import TextEditor from "./TextEditor";
 import { usePostsCreationStore } from "../../../store/postsStore";
 import HeroSection from "../HeroSection";
 import ContentCard from "../ContentCard";
+import { useState } from "react";
+import { savePost } from "@/app/actions";
+import toast from "react-hot-toast";
+import { formatReadableDate } from "@/utils/formatReadableDate";
 
 const Dashboard = () => {
   const { newPost } = usePostsCreationStore();
-  const handleSave = (newPost: PostCreation) => {
-    // Implement your save logic here
-    console.log("Saved content:", newPost);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      await savePost(newPost);
+      toast.success("Post saved successfully");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to save post"
+      );
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -21,7 +35,7 @@ const Dashboard = () => {
           Wendi&apos;s Poem Editor
         </h1>
         <div className="flex size-full">
-          <TextEditor handleSave={handleSave} />
+          <TextEditor handleSave={handleSave} disabled={isSaving} />
         </div>
       </div>
 
@@ -45,13 +59,7 @@ const Dashboard = () => {
             </HeroSection>
             <ContentCard
               content_text={newPost.content || "Content"}
-              date={
-                newPost.date
-                  ? new Date(newPost.date).toLocaleDateString("en-GB", {
-                      timeZone: "Europe/London",
-                    })
-                  : "Date"
-              }
+              date={formatReadableDate(newPost.date || new Date())}
             />
           </div>
         </div>

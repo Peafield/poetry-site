@@ -15,7 +15,7 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
   }, []);
 
   const handleClick = () => {
-    router.push(`/poem/${latestPost?.id}`);
+    router.push(`/poem/${latestPost?._id}`);
   };
 
   return (
