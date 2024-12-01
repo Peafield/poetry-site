@@ -1,10 +1,12 @@
 import Home from "@/components/Home";
 import { Post } from "./api/posts/postSchema";
+import { ApiResponse } from "@/types/api";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   let postData: Post[] | null = null;
+  let error: ApiResponse | null = null;
 
   try {
     const response = await fetch(
@@ -17,11 +19,18 @@ export default async function HomePage() {
     if (response.ok) {
       postData = await response.json();
     } else {
-      console.error("Failed to fetch data: ", response.statusText);
+      error = {
+        statusCode: response.status,
+        message: response.statusText,
+      };
     }
-  } catch (error) {
-    console.error("Error fetching posts: ", error);
+  } catch (err) {
+    error = {
+      statusCode: 500,
+      message: "Internal Server Error",
+      error: err instanceof Error ? err.message : String(err),
+    };
   }
 
-  return <Home postsData={postData} />;
+  return <Home postsData={postData} error={error} />;
 }

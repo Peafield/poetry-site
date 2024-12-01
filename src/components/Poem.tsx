@@ -21,7 +21,7 @@ const Poem = ({ id }: PoemProps) => {
   return (
     post && (
       <>
-        <HeroSection post={post}>
+        <HeroSection post={post} showImage={true}>
           <div
             className={`absolute inset-0 flex items-center justify-center bg-gray-900/35 pb-20 transition-opacity duration-700 ease-in-out ${
               isVisible ? "opacity-100" : "opacity-0"

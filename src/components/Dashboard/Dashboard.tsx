@@ -32,6 +32,7 @@ const Dashboard = () => {
           <div className="flex size-full flex-col rounded-lg border p-2">
             <HeroSection
               newPost={newPost}
+              showImage={true}
               className="relative mb-4 w-full md:max-h-64"
             >
               <div

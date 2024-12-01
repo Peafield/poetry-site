@@ -1,3 +1,5 @@
+"use client";
+
 import { Post } from "@/app/api/posts/postSchema";
 import Image from "next/image";
 import clsx from "clsx";
@@ -6,6 +8,7 @@ import { useEffect, useMemo } from "react";
 
 type HeroSectionProps = {
   children: React.ReactNode;
+  showImage: boolean;
   post?: Post;
   newPost?: PostCreation;
   className?: string;
@@ -13,6 +16,7 @@ type HeroSectionProps = {
 
 const HeroSection = ({
   children,
+  showImage = true,
   post,
   newPost,
   className,
@@ -46,16 +50,18 @@ const HeroSection = ({
         className
       )}
     >
-      <Image
-        src={imageData.src}
-        alt={imageData.alt}
-        placeholder="blur"
-        blurDataURL={imageData.src}
-        priority
-        fill
-        sizes="100%"
-        className="object-cover"
-      />
+      {showImage && (
+        <Image
+          src={imageData.src}
+          alt={imageData.alt}
+          placeholder="blur"
+          blurDataURL={imageData.src}
+          priority
+          fill
+          sizes="100%"
+          className="object-cover"
+        />
+      )}
       {children}
     </section>
   );
