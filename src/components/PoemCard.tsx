@@ -10,16 +10,17 @@ type PoemCardProps = {
 
 const PoemCard = ({ post }: PoemCardProps) => {
   const router = useRouter();
+  // TODO: Add delete functionality when admin is logged in
 
   return (
     <div
       role="button"
       tabIndex={0}
-      onClick={() => router.push(`/poem/${post.id}`)}
+      onClick={() => router.push(`/poem/${post._id}`)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          router.push(`/poem/${post.id}`);
+          router.push(`/poem/${post._id}`);
         }
       }}
       className="group relative flex h-[400px] w-80 cursor-pointer flex-col overflow-hidden rounded-2xl bg-stone-100 shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
@@ -49,7 +50,7 @@ const PoemCard = ({ post }: PoemCardProps) => {
             className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 ease-in-out hover:bg-secondary"
             onClick={(e) => {
               e.stopPropagation();
-              router.push(`/poem/${post.id}`);
+              router.push(`/poem/${post._id}`);
             }}
           >
             Read More

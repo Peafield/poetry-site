@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { formatReadableDate } from "@/utils/formatReadableDate";
 
 const Dashboard = () => {
+  // TODO: Implement editing of existing posts
   const { newPost } = usePostsCreationStore();
   const [isSaving, setIsSaving] = useState(false);
 

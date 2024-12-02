@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  // TODO: Add dashboard link when admin is logged in.
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
