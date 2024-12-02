@@ -10,7 +10,9 @@ export default async function ArchivePage() {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_APP_URL}/api/posts`,
       {
+        method: "GET",
         cache: "no-store",
+        next: { revalidate: 0 },
       }
     );
 

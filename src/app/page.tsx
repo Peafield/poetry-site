@@ -2,8 +2,6 @@ import Home from "@/components/Home";
 import { Post } from "./api/posts/postSchema";
 import { ApiResponse } from "@/types/api";
 
-export const dynamic = "force-dynamic";
-
 export default async function HomePage() {
   let postData: Post[] | null = null;
   let error: ApiResponse | null = null;
@@ -12,7 +10,9 @@ export default async function HomePage() {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_APP_URL}/api/posts`,
       {
+        method: "GET",
         cache: "no-store",
+        next: { revalidate: 0 },
       }
     );
 
