@@ -39,6 +39,7 @@ interface PostsCreationState {
   setNewPost: (post: PostCreation) => void;
 }
 
+// FIXME: we need to insert a creation date for sorting but it can't be a Date object, must be a string.
 export const usePostsCreationStore = create<PostsCreationState>((set) => ({
   newPost: {
     title: "",
