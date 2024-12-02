@@ -12,7 +12,7 @@ export const PostCreationSchema = z.object({
     .max(10000, "Content must be less than 10000 characters")
     .optional(),
   image: z.instanceof(Blob).optional(),
-  date: z.string().datetime(),
+  date: z.string(),
 });
 
 export type PostCreation = z.infer<typeof PostCreationSchema>;

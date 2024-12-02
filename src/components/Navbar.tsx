@@ -3,16 +3,32 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BurgerIcon, CloseIcon } from "./icons";
+import { useUserStore } from "../../store/userStore";
+import { getUserAuthStatus } from "@/app/actions";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathName = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // TODO: Add dashboard link when admin is logged in.
+  const {
+    user: { isLoggedIn },
+    setUser,
+  } = useUserStore();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Check if user is logged in on page load
+  useEffect(() => {
+    (async () => {
+      const isLoggedIn = await getUserAuthStatus();
+      const loggedInStatus = isLoggedIn.success;
+      setUser({ isLoggedIn: loggedInStatus });
+    })();
+  }, [pathName, setUser]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -42,6 +58,13 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="hidden space-x-16 md:flex">
+          {isLoggedIn && (
+            <Link href="/admin/dashboard">
+              <h2 className="font-playfair_display text-2xl font-medium hover:underline">
+                Dashboard
+              </h2>
+            </Link>
+          )}
           <Link href="/about">
             <h2 className="font-playfair_display text-2xl font-medium hover:underline">
               About
@@ -95,6 +118,15 @@ const Navbar = () => {
   `}
       >
         <div className="space-y-4 sm:px-3">
+          {isLoggedIn && (
+            <div>
+              <Link href="/admin/dashboard">
+                <h2 className="font-playfair_display text-xl hover:underline">
+                  Dashboard
+                </h2>
+              </Link>
+            </div>
+          )}
           <div>
             <Link href="/about">
               <h2 className="font-playfair_display text-xl hover:underline">

@@ -1,28 +1,12 @@
+import { getUserAuthStatus } from "@/app/actions";
 import Dashboard from "@/components/Dashboard/Dashboard";
-import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const JWT_SECRET = process.env.JWT_SECRET!;
-
 export default async function DashboardPage() {
-  const cookieStore = cookies();
-  const token = (await cookieStore).get("auth_token")?.value;
+  const loggedInStatus = getUserAuthStatus();
 
-  if (!token) {
-    // Redirect if no token exists
+  if (!(await loggedInStatus).success) {
     return redirect("/admin");
   }
-
-  try {
-    // Decode and validate the token
-    jwt.verify(token, JWT_SECRET);
-
-    // If valid, return the admin dashboard
-    return <Dashboard />;
-  } catch (err) {
-    console.error(err);
-    // If invalid, redirect to login
-    return redirect("/admin");
-  }
+  return <Dashboard />;
 }

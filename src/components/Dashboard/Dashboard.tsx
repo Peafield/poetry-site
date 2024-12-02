@@ -7,7 +7,6 @@ import ContentCard from "../ContentCard";
 import { useState } from "react";
 import { savePost } from "@/app/actions";
 import toast from "react-hot-toast";
-import { formatReadableDate } from "@/utils/formatReadableDate";
 
 const Dashboard = () => {
   // TODO: Implement editing of existing posts
@@ -60,8 +59,10 @@ const Dashboard = () => {
               </div>
             </HeroSection>
             <ContentCard
-              content_text={newPost.content || "Content"}
-              date={formatReadableDate(newPost.date || new Date())}
+              content_text={
+                newPost.content || "You're words will appear here..."
+              }
+              date={newPost.date}
             />
           </div>
         </div>

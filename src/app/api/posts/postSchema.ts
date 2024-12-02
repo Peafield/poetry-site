@@ -10,7 +10,7 @@ export const PostInsertSchema = z.object({
   preview_text: z.string(),
   content_text: z.string(),
   image_url: z.string(),
-  date: z.string().datetime(),
+  date: z.string(),
 });
 
 // Schema for posts retrieved from the database (with _id)

@@ -42,7 +42,11 @@ interface PostsCreationState {
 export const usePostsCreationStore = create<PostsCreationState>((set) => ({
   newPost: {
     title: "",
-    date: new Date(),
+    date: new Date().toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
     content: "",
   },
   setNewPost: (post) => {

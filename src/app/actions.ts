@@ -8,6 +8,9 @@ import path from "path";
 import sharp from "sharp";
 import { Post } from "./api/posts/postSchema";
 import getPreviewText from "@/utils/getPreviewText";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function testDatabaseConnection(): Promise<ActionResponse> {
   try {
@@ -27,6 +30,21 @@ export async function testDatabaseConnection(): Promise<ActionResponse> {
       message: "Failed to connect to MongoDB",
       error: errorMessage,
     };
+  }
+}
+
+export async function getUserAuthStatus(): Promise<ActionResponse> {
+  const cookieStore = cookies();
+  const token = (await cookieStore).get("auth_token")?.value;
+  try {
+    if (!token) {
+      return { success: false, message: "No token found" };
+    }
+    jwt.verify(token, JWT_SECRET);
+    return { success: true, message: "Token is valid" };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return { success: false, message: "Invalid token", error: errorMessage };
   }
 }
 

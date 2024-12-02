@@ -37,6 +37,7 @@ export default function RootLayout({
         <Toaster position="top-center" />
         <Navbar />
         <main className="w-full flex-1 pt-16">{children}</main>
+        {/* TODO: FIX FOOTER! */}
         {/* <Footer /> */}
       </body>
     </html>

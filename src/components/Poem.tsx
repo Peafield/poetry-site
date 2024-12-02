@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { usePostsStore } from "../../store/postsStore";
 import HeroSection from "./HeroSection";
 import ContentCard from "./ContentCard";
-import { formatReadableDate } from "@/utils/formatReadableDate";
 
 type PoemProps = {
   id: string;
@@ -33,10 +32,7 @@ const Poem = ({ id }: PoemProps) => {
             </h1>
           </div>
         </HeroSection>
-        <ContentCard
-          content_text={post.content_text}
-          date={formatReadableDate(post.date)}
-        />
+        <ContentCard content_text={post.content_text} date={post.date} />
       </>
     )
   );
