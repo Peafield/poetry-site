@@ -7,6 +7,7 @@ import { writeFile } from "fs";
 import path from "path";
 import sharp from "sharp";
 import { Post } from "./api/posts/postSchema";
+import getPreviewText from "@/utils/getPreviewText";
 
 export async function testDatabaseConnection(): Promise<ActionResponse> {
   try {
@@ -86,12 +87,16 @@ export async function savePost(newPost: PostCreation): Promise<ActionResponse> {
       };
     }
 
+    let preview_text = "";
+    if (newPost.content) {
+      preview_text = getPreviewText(newPost.content);
+    }
+
     const postToUpload: Post = {
       title: newPost.title,
       date: newPost.date,
       _id: "",
-      // TODO: Add preview text (nltk?)
-      preview_text: "",
+      preview_text: preview_text,
       content_text: newPost.content || "",
       image_url: imageFilename,
     };
