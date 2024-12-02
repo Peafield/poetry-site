@@ -29,7 +29,13 @@ export async function GET() {
     const validatedData = PostsArraySchema.parse(sortedPosts);
 
     // Return the validated data
-    return NextResponse.json(validatedData, { status: 200 });
+    return NextResponse.json(validatedData, {
+      status: 200,
+      headers: {
+        "Cache-Control": "no-store, must-revalidate",
+        Pragma: "no-cache",
+      },
+    });
   } catch (error) {
     console.error("Error fetching posts:", error);
     return NextResponse.json(
@@ -95,38 +101,6 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
     console.error("Error updating post:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function DELETE(req: NextRequest) {
-  try {
-    // Parse and validate the request body
-    const json = await req.json();
-    const parsedData = PostSchema.parse(json);
-
-    // Connect to the MongoDB client
-    const client = await clientPromise;
-    const db = client.db(process.env.MONGO_DB_NAME);
-
-    // Delete the post with the given ID
-    const result = await db
-      .collection("posts")
-      .deleteOne({ _id: new ObjectId(parsedData._id) });
-
-    // Respond with the number of documents deleted
-    return NextResponse.json(
-      { deletedCount: result.deletedCount },
-      { status: 200 }
-    );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error("Error deleting post:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

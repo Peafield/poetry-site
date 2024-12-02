@@ -140,3 +140,23 @@ export async function savePost(newPost: PostCreation): Promise<ActionResponse> {
     };
   }
 }
+
+export async function deletePost(postId: string): Promise<ActionResponse> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/posts/${postId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    return await response.json();
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return {
+      success: false,
+      message: "Failed to delete post",
+      error: errorMessage,
+    };
+  }
+}

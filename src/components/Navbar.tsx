@@ -23,6 +23,7 @@ const Navbar = () => {
 
   // Check if user is logged in on page load
   useEffect(() => {
+    setIsOpen(false);
     (async () => {
       const isLoggedIn = await getUserAuthStatus();
       const loggedInStatus = isLoggedIn.success;

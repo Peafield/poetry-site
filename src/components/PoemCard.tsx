@@ -4,7 +4,9 @@ import { Post } from "@/app/api/posts/postSchema";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "../../store/userStore";
-
+import toast from "react-hot-toast";
+import { IoWarning } from "react-icons/io5";
+import { deletePost } from "@/app/actions";
 type PoemCardProps = {
   post: Post;
 };
@@ -14,6 +16,55 @@ const PoemCard = ({ post }: PoemCardProps) => {
   const {
     user: { isLoggedIn },
   } = useUserStore();
+
+  const handleDelete = async () => {
+    try {
+      await deletePost(post._id.toString());
+      toast.success("Post deleted successfully");
+      router.refresh();
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to delete post"
+      );
+    }
+  };
+
+  const renderDeleteToast = async () => {
+    return toast(
+      (t) => (
+        <div className="flex flex-col items-center gap-6 p-4">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <IoWarning className="size-16 animate-pulse text-red-500" />
+            <h1 className="font-lato text-xl font-semibold text-gray-900">
+              Are you sure you want to delete this poem?
+            </h1>
+          </div>
+
+          <div className="flex w-full gap-4">
+            <button
+              onClick={() => {
+                toast.dismiss(t.id);
+                handleDelete();
+              }}
+              className="flex-1 rounded-lg bg-red-500 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:bg-red-600 hover:shadow-lg"
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="flex-1 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-gray-900 shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:bg-secondary hover:shadow-lg"
+            >
+              Keep
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: 30000,
+      }
+    );
+  };
+
   return (
     <div
       role="button"
@@ -43,7 +94,13 @@ const PoemCard = ({ post }: PoemCardProps) => {
             <button className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-gray-900 transition duration-200 ease-in-out hover:bg-secondary">
               Edit
             </button>
-            <button className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-gray-900 transition duration-200 ease-in-out hover:bg-secondary">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                renderDeleteToast();
+              }}
+              className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-gray-900 transition duration-200 ease-in-out hover:bg-secondary"
+            >
               Delete
             </button>
           </div>
