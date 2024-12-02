@@ -45,7 +45,7 @@ const Carousel = ({ posts }: CarouselProps) => {
   }, [posts.length]);
 
   const handleClick = () => {
-    router.push(`/poem/${posts[currentIndex].id}`);
+    router.push(`/poem/${posts[currentIndex]._id}`);
   };
 
   return (
