@@ -104,17 +104,14 @@ const Navbar = () => {
       <div
         ref={menuRef}
         className={`
-    float-end
-    flex origin-top 
-    flex-col 
+    absolute right-0 top-full
+    flex flex-col 
+    overflow-hidden
     rounded-bl-xl
     bg-primary/95
-    p-4
-    transition-transform
-    duration-500
-    ease-in-out
-    md:hidden
-    ${isOpen ? "scale-y-100" : "scale-y-0"}
+    transition-all
+    duration-500 ease-in-out md:hidden
+    ${isOpen ? "max-h-96 p-4" : "max-h-0"}
   `}
       >
         <div className="space-y-4 sm:px-3">
