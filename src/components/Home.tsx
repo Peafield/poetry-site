@@ -28,7 +28,7 @@ const Home = ({ postsData, error }: HomeProps) => {
   if (postsData.length === 0) return <p>No posts available</p>;
 
   const latestPost = postsData[0];
-  const remainingPosts = postsData.slice(1);
+  const remainingPosts = postsData.slice(1, 6); // Show 5 more posts
 
   return (
     <>
