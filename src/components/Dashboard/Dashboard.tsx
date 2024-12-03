@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 const Dashboard = () => {
   // TODO: Implement editing of existing posts
   // TODO: Implement modal for add another or exit
-  const { newPost } = usePostsCreationStore();
+  const { newPost, resetNewPost } = usePostsCreationStore();
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
@@ -19,9 +19,12 @@ const Dashboard = () => {
     try {
       await savePost(newPost);
       toast.success("Post saved successfully");
+      resetNewPost();
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to save post"
+        error instanceof Error
+          ? error.message
+          : "Failed to save post. Please try again."
       );
     } finally {
       setIsSaving(false);

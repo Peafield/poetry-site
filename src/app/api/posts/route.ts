@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PostInsertSchema, PostsArraySchema, PostSchema } from "./postSchema";
+import {
+  Post,
+  PostInsertSchema,
+  PostsArraySchema,
+  PostSchema,
+} from "./postSchema";
 import { z } from "zod";
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
@@ -11,18 +16,18 @@ export async function GET() {
     const db = client.db(process.env.MONGO_DB_NAME);
 
     // Fetch all posts
-    const posts = await db.collection("posts").find().toArray();
+    const posts = await db.collection<Post>("posts").find().toArray();
 
-    // Convert ObjectId to string and format dates
+    // Convert ObjectId to string
     const formattedPosts = posts.map((post) => ({
       ...post,
       _id: post._id.toString(),
-      date: post.date instanceof Date ? post.date.toISOString() : post.date,
     }));
 
     // Sort posts by date (most recent first)
     const sortedPosts = formattedPosts.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
 
     // Validate data using Zod schema

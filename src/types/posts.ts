@@ -13,6 +13,7 @@ export const PostCreationSchema = z.object({
     .optional(),
   image: z.instanceof(Blob).optional(),
   date: z.string(),
+  created_at: z.date(),
 });
 
 export type PostCreation = z.infer<typeof PostCreationSchema>;

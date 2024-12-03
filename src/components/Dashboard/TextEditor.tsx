@@ -54,6 +54,12 @@ const TextEditor = ({ handleSave, disabled }: TextEditorProps) => {
   });
 
   useEffect(() => {
+    if (editor && editor.getHTML() !== newPost.content) {
+      editor.commands.setContent(newPost.content || "");
+    }
+  }, [editor, newPost.content]);
+
+  useEffect(() => {
     return () => {
       if (editor) {
         editor.destroy();

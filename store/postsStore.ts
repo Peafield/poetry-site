@@ -37,22 +37,30 @@ export const usePostsStore = create<PostsState>()(
 interface PostsCreationState {
   newPost: PostCreation;
   setNewPost: (post: PostCreation) => void;
+  resetNewPost: () => void;
 }
 
-// FIXME: we need to insert a creation date for sorting but it can't be a Date object, must be a string.
+const initialNewPostState: PostCreation = {
+  title: "",
+  date: new Date().toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }),
+  content: "",
+  created_at: new Date(),
+};
+
 export const usePostsCreationStore = create<PostsCreationState>((set) => ({
-  newPost: {
-    title: "",
-    date: new Date().toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }),
-    content: "",
-  },
+  newPost: initialNewPostState,
   setNewPost: (post) => {
     set({
       newPost: post,
+    });
+  },
+  resetNewPost: () => {
+    set({
+      newPost: initialNewPostState,
     });
   },
 }));

@@ -117,6 +117,7 @@ export async function savePost(newPost: PostCreation): Promise<ActionResponse> {
       preview_text: preview_text,
       content_text: newPost.content || "",
       image_url: imageFilename,
+      created_at: newPost.created_at.toISOString(),
     };
 
     const response = await fetch(
