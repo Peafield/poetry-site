@@ -52,30 +52,35 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    // Parse and validate the request body
     const json = await req.json();
     const parsedData = PostInsertSchema.parse(json);
 
-    // Connect to the MongoDB client
     const client = await clientPromise;
     const db = client.db(process.env.MONGO_DB_NAME);
 
-    // Insert the validated data into the 'posts' collection
     const result = await db.collection("posts").insertOne(parsedData);
 
-    // Respond with the inserted document's ID
-    return NextResponse.json(
-      { insertedId: result.insertedId },
-      { status: 201 }
-    );
-  } catch (error) {
-    // Handle validation errors and other exceptions
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
+    // Fetch the inserted document to return it
+    const insertedPost = await db
+      .collection<Post>("posts")
+      .findOne({ _id: result.insertedId });
+
+    if (insertedPost) {
+      // Convert _id to string
+      const formattedPost = {
+        ...insertedPost,
+        _id: insertedPost._id.toString(),
+      };
+      return NextResponse.json(formattedPost, { status: 201 });
+    } else {
+      throw new Error("Failed to retrieve the saved post.");
     }
+  } catch (error) {
     console.error("Error inserting post:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      {
+        error: error instanceof Error ? error.message : "Internal Server Error",
+      },
       { status: 500 }
     );
   }

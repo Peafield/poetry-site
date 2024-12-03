@@ -84,7 +84,9 @@ export async function processAndSaveImage(
   }
 }
 
-export async function savePost(newPost: PostCreation): Promise<ActionResponse> {
+export async function savePost(
+  newPost: PostCreation
+): Promise<ActionResponse<Post>> {
   try {
     if (!newPost.title || !newPost.image) {
       return {
@@ -131,7 +133,21 @@ export async function savePost(newPost: PostCreation): Promise<ActionResponse> {
       }
     );
 
-    return await response.json();
+    if (response.ok) {
+      const savedPost = await response.json();
+
+      return {
+        success: true,
+        message: "Post saved successfully",
+        data: savedPost as Post,
+      };
+    } else {
+      const errorData = await response.json();
+      return {
+        success: false,
+        message: errorData.error || "Failed to save post",
+      };
+    }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     return {

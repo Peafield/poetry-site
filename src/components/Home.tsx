@@ -15,13 +15,13 @@ type HomeProps = {
 };
 
 const Home = ({ postsData, error }: HomeProps) => {
-  const { initializeStore } = usePostsStore();
+  const { setPosts } = usePostsStore();
 
   useEffect(() => {
     if (postsData) {
-      initializeStore(postsData);
+      setPosts(postsData);
     }
-  }, [initializeStore, postsData]);
+  }, [setPosts, postsData]);
 
   if (error) return <p>Error: {error.message}</p>;
   if (!postsData) return <p>Loading...</p>;

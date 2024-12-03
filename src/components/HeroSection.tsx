@@ -8,40 +8,51 @@ import { useEffect, useMemo } from "react";
 
 type HeroSectionProps = {
   children: React.ReactNode;
-  showImage: boolean;
-  post?: Post;
-  newPost?: PostCreation;
+  showImage?: boolean;
+  post?: Post | PostCreation;
   className?: string;
 };
+
+function isPostCreation(post: Post | PostCreation): post is PostCreation {
+  return (post as PostCreation).image !== undefined;
+}
+
+function isPost(post: Post | PostCreation): post is Post {
+  return (post as Post).image_url !== undefined;
+}
 
 const HeroSection = ({
   children,
   showImage = true,
   post,
-  newPost,
   className,
 }: HeroSectionProps) => {
   const imageData = useMemo(() => {
-    if (newPost?.image) {
-      const src = URL.createObjectURL(newPost.image);
-      const alt = `Image for ${newPost.title || "New Post"}`;
-      return { src, alt };
-    } else if (post?.image_url) {
-      const src = `/mockImages/${post.image_url}`;
-      const alt = `Image for ${post.title}`;
-      return { src, alt };
-    } else {
-      return { src: "/placeholder.png", alt: "Placeholder image" };
+    if (post) {
+      if (isPostCreation(post) && post.image) {
+        const src = URL.createObjectURL(post.image);
+        const alt = `Image for ${post.title || "New Post"}`;
+        return { src, alt, needsCleanup: true };
+      } else if (isPost(post) && post.image_url) {
+        const src = `/mockImages/${post.image_url}`;
+        const alt = `Image for ${post.title}`;
+        return { src, alt, needsCleanup: false };
+      }
     }
-  }, [newPost?.image, newPost?.title, post?.image_url, post?.title]);
+    return {
+      src: "/placeholder.png",
+      alt: "Placeholder image",
+      needsCleanup: false,
+    };
+  }, [post]);
 
   useEffect(() => {
     return () => {
-      if (newPost?.image) {
+      if (imageData.needsCleanup) {
         URL.revokeObjectURL(imageData.src);
       }
     };
-  }, [imageData.src, newPost?.image]);
+  }, [imageData]);
 
   return (
     <section

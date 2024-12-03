@@ -24,6 +24,7 @@ interface TextEditorProps {
   disabled: boolean;
 }
 
+// TODO: FIX THIS! It's completely broken and overly complicated. I just need one Post type that can optionally have an image blob.
 const TextEditor = ({ handleSave, disabled }: TextEditorProps) => {
   const { newPost, setNewPost } = usePostsCreationStore();
   const editor = useEditor({

@@ -8,7 +8,6 @@ interface PostsState {
   posts: Post[] | null;
   setLatest: (post: Post) => void;
   setPosts: (posts: Post[]) => void;
-  initializeStore: (posts: Post[]) => void;
 }
 
 export const usePostsStore = create<PostsState>()(
@@ -26,7 +25,6 @@ export const usePostsStore = create<PostsState>()(
           posts: posts,
         });
       },
-      initializeStore: (posts) => set({ latest: posts[0], posts }),
     }),
     {
       name: "posts-storage",

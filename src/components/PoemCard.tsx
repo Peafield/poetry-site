@@ -17,6 +17,10 @@ const PoemCard = ({ post }: PoemCardProps) => {
     user: { isLoggedIn },
   } = useUserStore();
 
+  const handleEdit = () => {
+    router.push(`/admin/dashboard/${post._id}`);
+  };
+
   const handleDelete = async () => {
     try {
       await deletePost(post._id.toString());
@@ -91,7 +95,13 @@ const PoemCard = ({ post }: PoemCardProps) => {
         {/* TODO: implement these buttons! */}
         {isLoggedIn && (
           <div className="absolute inset-0 flex items-center justify-center gap-4 bg-black/50 opacity-100 transition-opacity duration-300 ease-in-out md:opacity-0 md:group-hover:opacity-100">
-            <button className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-gray-900 transition duration-200 ease-in-out hover:bg-secondary">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleEdit();
+              }}
+              className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-gray-900 transition duration-200 ease-in-out hover:bg-secondary"
+            >
               Edit
             </button>
             <button
