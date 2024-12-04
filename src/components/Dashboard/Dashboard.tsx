@@ -7,7 +7,7 @@ import {
 } from "../../../store/postsStore";
 import HeroSection from "../HeroSection";
 import ContentCard from "../ContentCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { savePost } from "@/app/actions";
 import toast from "react-hot-toast";
 
@@ -15,15 +15,23 @@ type DashboardProps = {
   postId?: string;
 };
 
+// TODO: FIX POST_ID IS IN AN ARRAY FOR SOME REASON?!
 const Dashboard = ({ postId }: DashboardProps) => {
+  const postToEdit = postId ?? "";
   const { newPost, setNewPost, resetNewPost } = usePostsCreationStore();
   const { posts, setPosts } = usePostsStore();
   const [isSaving, setIsSaving] = useState(false);
 
-  if (postId) {
+  useEffect(() => {
+    console.log("new post value", newPost);
+    console.log("posts value", posts);
+  }, [newPost, posts]);
+
+  if (postToEdit) {
     // Editing or viewing an existing post
     if (posts && posts.length > 0) {
-      const existingPost = posts.find((post) => post._id === postId);
+      const existingPost = posts.find((post) => post._id === postToEdit);
+      console.log("🚀 ~ useEffect ~ existingPost:", existingPost);
       if (existingPost) {
         setNewPost(existingPost);
       }
