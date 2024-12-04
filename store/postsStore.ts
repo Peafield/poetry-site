@@ -58,7 +58,7 @@ export const usePostsCreationStore = create<PostsCreationState>((set) => ({
   },
   resetNewPost: () => {
     set({
-      newPost: initialNewPostState,
+      newPost: { ...initialNewPostState, created_at: new Date().toISOString() },
     });
   },
 }));

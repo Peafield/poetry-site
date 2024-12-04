@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 type DashboardProps = {
   params: Promise<{
-    id: string;
+    id?: string;
   }>;
 };
 
