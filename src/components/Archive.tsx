@@ -1,4 +1,4 @@
-import { Post } from "@/app/api/posts/postSchema";
+import { Post } from "@/types/posts";
 import PoemCard from "./PoemCard";
 
 type ArchiveProps = {

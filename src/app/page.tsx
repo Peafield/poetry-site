@@ -1,6 +1,6 @@
 import Home from "@/components/Home";
-import { Post } from "./api/posts/postSchema";
 import { ApiResponse } from "@/types/api";
+import { Post } from "@/types/posts";
 
 export default async function HomePage() {
   let postData: Post[] | null = null;

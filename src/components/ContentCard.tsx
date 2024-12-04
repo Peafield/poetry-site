@@ -1,21 +1,21 @@
 import clsx from "clsx";
 
 type ContentCardProps = {
-  content_text: string;
+  content: string;
   date?: string;
   className?: string;
 };
 
-const ContentCard = ({ content_text, date, className }: ContentCardProps) => {
+const ContentCard = ({ content, date, className }: ContentCardProps) => {
   const isHTML = (str: string) => {
     return /<[a-z][\s\S]*>/i.test(str);
   };
 
   const renderContent = () => {
-    if (isHTML(content_text)) {
+    if (isHTML(content)) {
       return (
         <div
-          dangerouslySetInnerHTML={{ __html: content_text }}
+          dangerouslySetInnerHTML={{ __html: content }}
           className="mt-8 h-full max-w-full break-words p-8 font-lato font-medium focus:outline-primary/35"
         />
       );
@@ -23,7 +23,7 @@ const ContentCard = ({ content_text, date, className }: ContentCardProps) => {
 
     return (
       <p className="mt-8 h-full max-w-full break-words p-8 font-lato font-medium focus:outline-primary/35">
-        {content_text}
+        {content}
       </p>
     );
   };

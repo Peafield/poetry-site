@@ -32,7 +32,7 @@ const Poem = ({ id }: PoemProps) => {
             </h1>
           </div>
         </HeroSection>
-        <ContentCard content_text={post.content_text} date={post.date} />
+        <ContentCard content={post.content} date={post.date} />
       </>
     )
   );

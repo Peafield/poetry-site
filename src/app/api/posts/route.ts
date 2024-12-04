@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  Post,
-  PostInsertSchema,
-  PostsArraySchema,
-  PostSchema,
-} from "./postSchema";
 import { z } from "zod";
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
+import {
+  Post,
+  PostInsertSchema,
+  PostSchema,
+  PostArraySchema,
+} from "@/types/posts";
 
 export async function GET() {
   try {
@@ -31,7 +31,7 @@ export async function GET() {
     );
 
     // Validate data using Zod schema
-    const validatedData = PostsArraySchema.parse(sortedPosts);
+    const validatedData = PostArraySchema.parse(sortedPosts);
 
     // Return the validated data
     return NextResponse.json(validatedData, {

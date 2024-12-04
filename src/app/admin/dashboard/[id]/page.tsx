@@ -3,18 +3,18 @@ import Dashboard from "@/components/Dashboard/Dashboard";
 import { redirect } from "next/navigation";
 
 type DashboardProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
-export default async function DashboardPage({
-  params: { id },
-}: DashboardProps) {
-  const loggedInStatus = getUserAuthStatus();
+export default async function DashboardPage({ params }: DashboardProps) {
+  const { id } = await params;
+  const loggedInStatus = await getUserAuthStatus();
 
-  if (!(await loggedInStatus).success) {
-    return redirect("/admin");
+  if (!loggedInStatus.success) {
+    redirect("/admin");
   }
+
   return <Dashboard postId={id} />;
 }

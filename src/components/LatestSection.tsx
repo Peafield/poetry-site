@@ -1,4 +1,4 @@
-import { Post } from "@/app/api/posts/postSchema";
+import { Post } from "@/types/posts";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

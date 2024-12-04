@@ -16,17 +16,17 @@ import { MdOutlineFormatAlignRight } from "react-icons/md";
 import { MdOutlineFormatAlignJustify } from "react-icons/md";
 import { MdOutlineSave } from "react-icons/md";
 import { TbPhotoPlus } from "react-icons/tb";
-import { PostCreation } from "@/types/posts";
+import { PostUpdate } from "@/types/posts";
 import { usePostsCreationStore } from "../../../store/postsStore";
 
 interface TextEditorProps {
-  handleSave: (newPost: PostCreation) => void;
+  post: PostUpdate;
+  handleSave: (post: PostUpdate) => void;
   disabled: boolean;
 }
 
-// TODO: FIX THIS! It's completely broken and overly complicated. I just need one Post type that can optionally have an image blob.
-const TextEditor = ({ handleSave, disabled }: TextEditorProps) => {
-  const { newPost, setNewPost } = usePostsCreationStore();
+const TextEditor = ({ post, handleSave, disabled }: TextEditorProps) => {
+  const { setNewPost } = usePostsCreationStore();
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -40,12 +40,12 @@ const TextEditor = ({ handleSave, disabled }: TextEditorProps) => {
       }),
       HardBreak,
     ],
-    content: newPost.content,
+    content: post.content,
     onUpdate: ({ editor }) => {
       if (editor.isEmpty) {
-        setNewPost({ ...newPost, content: "" });
+        setNewPost({ ...post, content: "" });
       } else {
-        setNewPost({ ...newPost, content: editor.getHTML() });
+        setNewPost({ ...post, content: editor.getHTML() });
       }
     },
     editorProps: {
@@ -57,10 +57,10 @@ const TextEditor = ({ handleSave, disabled }: TextEditorProps) => {
   });
 
   useEffect(() => {
-    if (editor && editor.getHTML() !== newPost.content) {
-      editor.commands.setContent(newPost.content || "");
+    if (editor && editor.getHTML() !== post.content) {
+      editor.commands.setContent(post.content || "");
     }
-  }, [editor, newPost.content]);
+  }, [editor, post.content]);
 
   useEffect(() => {
     return () => {
@@ -149,14 +149,12 @@ const TextEditor = ({ handleSave, disabled }: TextEditorProps) => {
           id="fileInput"
           type="file"
           className="hidden"
-          onChange={(e) =>
-            setNewPost({ ...newPost, image: e.target.files?.[0] })
-          }
+          onChange={(e) => setNewPost({ ...post, image: e.target.files?.[0] })}
         />
         {/* TODO: Disable save until all fields are entered */}
         {!disabled ? (
           <button
-            onClick={() => handleSave(newPost)}
+            onClick={() => handleSave(post)}
             className="flex flex-row items-center justify-center gap-x-2 rounded border p-2 hover:bg-secondary"
           >
             <p className="font-lato font-bold">Save</p>
@@ -193,8 +191,8 @@ const TextEditor = ({ handleSave, disabled }: TextEditorProps) => {
       <div className="mb-4 w-full">
         <input
           type="text"
-          value={newPost.title || ``}
-          onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+          value={post.title}
+          onChange={(e) => setNewPost({ ...post, title: e.target.value })}
           placeholder="Enter poem title..."
           className="w-full rounded border p-4 font-lato focus:outline-primary/35"
         />

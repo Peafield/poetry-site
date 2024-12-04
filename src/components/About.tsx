@@ -32,7 +32,7 @@ const About = () => {
           </div>
         </div>
       </HeroSection>
-      <ContentCard content_text={ABOUT_ME_TEXT} />
+      <ContentCard content={ABOUT_ME_TEXT} />
     </>
   );
 };

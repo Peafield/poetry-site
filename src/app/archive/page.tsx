@@ -1,5 +1,5 @@
 import Archive from "@/components/Archive";
-import { Post } from "../api/posts/postSchema";
+import { Post } from "@/types/posts";
 
 export const dynamic = "force-dynamic";
 

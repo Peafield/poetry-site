@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write .",
+    "check-types": "tsc --noEmit",
     "prepare": "husky"
   },
   "lint-staged": {

@@ -1,15 +1,14 @@
 "use server";
 
 import clientPromise from "@/lib/mongodb";
-import { ActionResponse } from "@/types/api";
-import { PostCreation } from "@/types/posts";
+import { Post, PostUpdate } from "@/types/posts";
 import { writeFile } from "fs";
 import path from "path";
 import sharp from "sharp";
-import { Post } from "./api/posts/postSchema";
 import getPreviewText from "@/utils/getPreviewText";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import { ActionResponse } from "@/types/api";
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function testDatabaseConnection(): Promise<ActionResponse> {
@@ -85,7 +84,7 @@ export async function processAndSaveImage(
 }
 
 export async function savePost(
-  newPost: PostCreation
+  newPost: PostUpdate
 ): Promise<ActionResponse<Post>> {
   try {
     if (!newPost.title || !newPost.image) {
@@ -112,15 +111,7 @@ export async function savePost(
       preview_text = getPreviewText(newPost.content);
     }
 
-    const postToUpload: Post = {
-      title: newPost.title,
-      date: newPost.date,
-      _id: "",
-      preview_text: preview_text,
-      content_text: newPost.content || "",
-      image_url: imageFilename,
-      created_at: newPost.created_at.toISOString(),
-    };
+    const postToUpload = { ...newPost, image_url: imageFilename, preview_text };
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_APP_URL}/api/posts`,
@@ -134,12 +125,12 @@ export async function savePost(
     );
 
     if (response.ok) {
-      const savedPost = await response.json();
+      const savedPost: Post = await response.json();
 
       return {
         success: true,
         message: "Post saved successfully",
-        data: savedPost as Post,
+        data: savedPost,
       };
     } else {
       const errorData = await response.json();

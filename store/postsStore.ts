@@ -1,5 +1,4 @@
-import { Post } from "@/app/api/posts/postSchema";
-import { PostCreation } from "@/types/posts";
+import { Post, PostUpdate } from "@/types/posts";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -33,12 +32,13 @@ export const usePostsStore = create<PostsState>()(
 );
 
 interface PostsCreationState {
-  newPost: PostCreation;
-  setNewPost: (post: PostCreation) => void;
+  newPost: PostUpdate;
+  setNewPost: (post: PostUpdate) => void;
   resetNewPost: () => void;
 }
 
-const initialNewPostState: PostCreation = {
+const initialNewPostState: PostUpdate = {
+  _id: "",
   title: "",
   date: new Date().toLocaleDateString("en-GB", {
     day: "numeric",
@@ -46,7 +46,7 @@ const initialNewPostState: PostCreation = {
     year: "numeric",
   }),
   content: "",
-  created_at: new Date(),
+  created_at: new Date().toISOString(),
 };
 
 export const usePostsCreationStore = create<PostsCreationState>((set) => ({

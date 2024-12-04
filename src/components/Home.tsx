@@ -1,13 +1,13 @@
 "use client";
 
 import HeroSection from "@/components/HeroSection";
-import { Post } from "@/app/api/posts/postSchema";
 import LatestPost from "./LatestSection";
 import Carousel from "./Carousel";
 import SectionHeading from "./SectionHeading";
 import { ApiResponse } from "@/types/api";
 import { usePostsStore } from "../../store/postsStore";
 import { useEffect } from "react";
+import { Post } from "@/types/posts";
 
 type HomeProps = {
   postsData: Post[] | null;
@@ -36,8 +36,12 @@ const Home = ({ postsData, error }: HomeProps) => {
       <HeroSection post={latestPost} showImage={true}>
         <LatestPost latestPost={latestPost} />
       </HeroSection>
-      <SectionHeading text="More Poems" />
-      {remainingPosts.length > 0 && <Carousel posts={remainingPosts} />}
+      {remainingPosts.length > 0 && (
+        <>
+          <SectionHeading text="More Poems" />
+          <Carousel posts={remainingPosts} />
+        </>
+      )}
     </>
   );
 };
