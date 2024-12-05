@@ -8,6 +8,20 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# Add build args here for build-time env vars
+ARG MONGODB_URI
+ARG JWT_SECRET
+ARG ADMIN_USERNAME
+ARG ADMIN_PASSWORD
+ARG NEXT_PUBLIC_APP_URL
+
+# Set them as environment variables
+ENV MONGODB_URI=$MONGODB_URI
+ENV JWT_SECRET=$JWT_SECRET
+ENV ADMIN_USERNAME=$ADMIN_USERNAME
+ENV ADMIN_PASSWORD=$ADMIN_PASSWORD
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 RUN \
