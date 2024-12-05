@@ -6,7 +6,10 @@ import ContentCard from "./ContentCard";
 const About = () => {
   return (
     <>
-      <HeroSection className="flex items-center justify-center">
+      <HeroSection
+        className="flex items-center justify-center"
+        showImage={false}
+      >
         <div className="grid w-full grid-cols-2 bg-tertiary mobile:gap-x-4 md:gap-x-8">
           <div className="flex size-full items-center justify-end">
             <h1 className="text-center font-bold mobile:text-4xl md:text-6xl">
@@ -29,7 +32,7 @@ const About = () => {
           </div>
         </div>
       </HeroSection>
-      <ContentCard content_text={ABOUT_ME_TEXT} />
+      <ContentCard content={ABOUT_ME_TEXT} />
     </>
   );
 };

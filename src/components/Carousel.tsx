@@ -1,12 +1,12 @@
 "use client";
 
-import { Post } from "@/app/api/posts/postSchema";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ChevronLeftIcon from "./icons/ChevronLeftIcon";
 import ChevronRightIcon from "./icons/ChevronRightIcon";
 import { AUTO_SLIDE_INTERVAL } from "@/app/constants/constants";
 import { useRouter } from "next/navigation";
+import { Post } from "@/types/posts";
 
 type CarouselProps = {
   posts: Post[];
@@ -45,7 +45,7 @@ const Carousel = ({ posts }: CarouselProps) => {
   }, [posts.length]);
 
   const handleClick = () => {
-    router.push(`/poem/${posts[currentIndex].id}`);
+    router.push(`/poem/${posts[currentIndex]._id}`);
   };
 
   return (

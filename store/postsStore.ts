@@ -1,4 +1,4 @@
-import { Post } from "@/app/api/posts/postSchema";
+import { Post, PostUpdate } from "@/types/posts";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -7,7 +7,6 @@ interface PostsState {
   posts: Post[] | null;
   setLatest: (post: Post) => void;
   setPosts: (posts: Post[]) => void;
-  initializeStore: (posts: Post[]) => void;
 }
 
 export const usePostsStore = create<PostsState>()(
@@ -25,10 +24,41 @@ export const usePostsStore = create<PostsState>()(
           posts: posts,
         });
       },
-      initializeStore: (posts) => set({ latest: posts[0], posts }),
     }),
     {
       name: "posts-storage",
     }
   )
 );
+
+interface PostsCreationState {
+  newPost: PostUpdate;
+  setNewPost: (post: PostUpdate) => void;
+  resetNewPost: () => void;
+}
+
+const initialNewPostState: PostUpdate = {
+  _id: "",
+  title: "",
+  date: new Date().toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }),
+  content: "",
+  created_at: new Date().toISOString(),
+};
+
+export const usePostsCreationStore = create<PostsCreationState>((set) => ({
+  newPost: initialNewPostState,
+  setNewPost: (post) => {
+    set({
+      newPost: post,
+    });
+  },
+  resetNewPost: () => {
+    set({
+      newPost: { ...initialNewPostState, created_at: new Date().toISOString() },
+    });
+  },
+}));

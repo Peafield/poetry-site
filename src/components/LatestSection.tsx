@@ -1,4 +1,4 @@
-import { Post } from "@/app/api/posts/postSchema";
+import { Post } from "@/types/posts";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -15,7 +15,7 @@ const LatestPost = ({ latestPost }: LastestPostProps) => {
   }, []);
 
   const handleClick = () => {
-    router.push(`/poem/${latestPost?.id}`);
+    router.push(`/poem/${latestPost?._id}`);
   };
 
   return (

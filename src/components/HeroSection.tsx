@@ -1,14 +1,50 @@
-import { Post } from "@/app/api/posts/postSchema";
+"use client";
+
 import Image from "next/image";
 import clsx from "clsx";
+import { PostUpdate } from "@/types/posts";
+import { useEffect, useMemo } from "react";
 
 type HeroSectionProps = {
   children: React.ReactNode;
-  post?: Post;
+  showImage?: boolean;
+  post?: PostUpdate;
   className?: string;
 };
 
-const HeroSection = ({ children, post, className }: HeroSectionProps) => {
+const HeroSection = ({
+  children,
+  showImage = true,
+  post,
+  className,
+}: HeroSectionProps) => {
+  const imageData = useMemo(() => {
+    if (post) {
+      if (post.image) {
+        const src = URL.createObjectURL(post.image);
+        const alt = `Image for ${post.title || "New Post"}`;
+        return { src, alt, needsCleanup: true };
+      } else if (post.image_url) {
+        const src = `/mockImages/${post.image_url}`;
+        const alt = `Image for ${post.title}`;
+        return { src, alt, needsCleanup: false };
+      }
+    }
+    return {
+      src: "/placeholder.png",
+      alt: "Placeholder image",
+      needsCleanup: false,
+    };
+  }, [post]);
+
+  useEffect(() => {
+    return () => {
+      if (imageData.needsCleanup) {
+        URL.revokeObjectURL(imageData.src);
+      }
+    };
+  }, [imageData]);
+
   return (
     <section
       className={clsx(
@@ -16,12 +52,12 @@ const HeroSection = ({ children, post, className }: HeroSectionProps) => {
         className
       )}
     >
-      {post && (
+      {showImage && (
         <Image
-          src={`/mockImages/${post.image_url}`}
-          alt={`Image for ${post?.title}`}
+          src={imageData.src}
+          alt={imageData.alt}
           placeholder="blur"
-          blurDataURL={`/mockImages/${post.image_url}`}
+          blurDataURL={imageData.src}
           priority
           fill
           sizes="100%"

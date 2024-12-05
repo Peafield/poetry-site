@@ -11,7 +11,7 @@ type PoemProps = {
 
 const Poem = ({ id }: PoemProps) => {
   const { posts } = usePostsStore();
-  const post = posts?.find((post) => post.id === id);
+  const post = posts?.find((post) => post._id === id);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Poem = ({ id }: PoemProps) => {
   return (
     post && (
       <>
-        <HeroSection post={post}>
+        <HeroSection post={post} showImage={true}>
           <div
             className={`absolute inset-0 flex items-center justify-center bg-gray-900/35 pb-20 transition-opacity duration-700 ease-in-out ${
               isVisible ? "opacity-100" : "opacity-0"
@@ -32,7 +32,7 @@ const Poem = ({ id }: PoemProps) => {
             </h1>
           </div>
         </HeroSection>
-        <ContentCard content_text={post.content_text} date={post.date} />
+        <ContentCard content={post.content} date={post.date} />
       </>
     )
   );

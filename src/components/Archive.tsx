@@ -1,4 +1,4 @@
-import { Post } from "@/app/api/posts/postSchema";
+import { Post } from "@/types/posts";
 import PoemCard from "./PoemCard";
 
 type ArchiveProps = {
@@ -16,7 +16,7 @@ const Archive = ({ posts }: ArchiveProps) => {
       </div>
       <div className="flex w-full flex-wrap items-center justify-center gap-6">
         {posts.map((post) => (
-          <div key={post.id}>
+          <div key={post._id.toString()}>
             <PoemCard post={post} />
           </div>
         ))}
