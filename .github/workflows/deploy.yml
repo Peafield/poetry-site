@@ -40,11 +40,11 @@ jobs:
       - name: Build and push Docker images
         run: |
           docker-compose -f docker-compose.yml build \
-            --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} \
-            --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            --build-arg ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }} \
-            --build-arg ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }} \
-            --build-arg NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
+            --build-arg "MONGODB_URI=${MONGODB_URI}" \
+            --build-arg "JWT_SECRET=${JWT_SECRET}" \
+            --build-arg "ADMIN_USERNAME=${ADMIN_USERNAME}" \
+            --build-arg "ADMIN_PASSWORD=${ADMIN_PASSWORD}" \
+            --build-arg "NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}" && \
           docker-compose -f docker-compose.yml push
 
       - name: SSH to DigitalOcean Droplet and deploy
