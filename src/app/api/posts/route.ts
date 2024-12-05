@@ -42,7 +42,9 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error("Error fetching posts:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error fetching posts:", error);
+    }
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
@@ -76,7 +78,9 @@ export async function POST(req: NextRequest) {
       throw new Error("Failed to retrieve the saved post.");
     }
   } catch (error) {
-    console.error("Error inserting post:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error inserting post:", error);
+    }
     return NextResponse.json(
       {
         error: error instanceof Error ? error.message : "Internal Server Error",
@@ -112,7 +116,9 @@ export async function PATCH(req: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
-    console.error("Error updating post:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error updating post:", error);
+    }
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

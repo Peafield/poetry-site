@@ -29,7 +29,9 @@ export async function DELETE(_request: NextRequest, { params }: Context) {
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("Error deleting post:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error deleting post:", error);
+    }
     return NextResponse.json(
       { error: "Failed to delete post" },
       { status: 500 }

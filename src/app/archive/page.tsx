@@ -19,10 +19,14 @@ export default async function ArchivePage() {
     if (response.ok) {
       postData = await response.json();
     } else {
-      console.error("Failed to fetch data: ", response.statusText);
+      if (process.env.NODE_ENV === "development") {
+        console.error("Failed to fetch data: ", response.statusText);
+      }
     }
   } catch (error) {
-    console.error("Error fetching posts: ", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error fetching posts: ", error);
+    }
   }
 
   return <Archive posts={postData} />;

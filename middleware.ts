@@ -15,7 +15,9 @@ export function middleware(req: NextRequest) {
     jwt.verify(token, JWT_SECRET);
     return NextResponse.next();
   } catch (err) {
-    console.error(err);
+    if (process.env.NODE_ENV === "development") {
+      console.error(err);
+    }
     return NextResponse.redirect(new URL("/admin", req.url));
   }
 }
