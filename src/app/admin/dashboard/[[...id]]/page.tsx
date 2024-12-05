@@ -4,12 +4,13 @@ import { redirect } from "next/navigation";
 
 type DashboardProps = {
   params: Promise<{
-    id?: string;
+    id?: string[];
   }>;
 };
 
 export default async function DashboardPage({ params }: DashboardProps) {
-  const { id } = await params;
+  const ids = (await params).id;
+  const id = ids ? ids[0] : undefined;
   const loggedInStatus = await getUserAuthStatus();
 
   if (!loggedInStatus.success) {

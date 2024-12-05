@@ -8,14 +8,15 @@ import {
 import HeroSection from "../HeroSection";
 import ContentCard from "../ContentCard";
 import { useEffect, useState } from "react";
-import { savePost } from "@/app/actions";
+import { patchPost, savePost } from "@/app/actions";
 import toast from "react-hot-toast";
+import { ActionResponse } from "@/types/api";
+import { Post } from "@/types/posts";
 
 type DashboardProps = {
   postId?: string;
 };
 
-// TODO: FIX POST_ID IS IN AN ARRAY FOR SOME REASON?!
 const Dashboard = ({ postId }: DashboardProps) => {
   const postToEdit = postId ?? "";
   const { newPost, setNewPost, resetNewPost } = usePostsCreationStore();
@@ -23,30 +24,34 @@ const Dashboard = ({ postId }: DashboardProps) => {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    console.log("new post value", newPost);
-    console.log("posts value", posts);
-  }, [newPost, posts]);
+    resetNewPost();
+  }, [resetNewPost]);
 
-  if (postToEdit) {
-    // Editing or viewing an existing post
-    if (posts && posts.length > 0) {
+  useEffect(() => {
+    if (postToEdit && posts && posts?.length > 0) {
       const existingPost = posts.find((post) => post._id === postToEdit);
-      console.log("🚀 ~ useEffect ~ existingPost:", existingPost);
       if (existingPost) {
         setNewPost(existingPost);
       }
     }
-  }
+  }, [postToEdit, posts, setNewPost]);
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      const response = await savePost(newPost);
+      let response: ActionResponse;
+      if (postId) {
+        response = await patchPost(newPost);
+      } else {
+        response = await savePost(newPost);
+      }
       if (response.success && response.data) {
         toast.success("Post saved successfully 🎉");
         if (response.data && posts) {
-          if (response.data) {
-            setPosts([response.data, ...posts]);
+          if (postId) {
+            setPosts([newPost as Post, ...posts]);
+          } else {
+            setPosts([response.data as Post, ...posts]);
           }
         }
         resetNewPost();

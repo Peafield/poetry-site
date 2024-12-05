@@ -83,21 +83,67 @@ export async function processAndSaveImage(
   }
 }
 
+export async function patchPost(
+  postToPatch: PostUpdate
+): Promise<ActionResponse> {
+  if (!postToPatch.title) {
+    return {
+      success: false,
+      message: "Please add a title to your post",
+    };
+  }
+
+  let preview_text = "";
+  if (postToPatch.content) {
+    preview_text = getPreviewText(postToPatch.content);
+  }
+
+  const postToUpload = {
+    ...postToPatch,
+    preview_text,
+  };
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/posts`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postToUpload),
+  });
+
+  if (response.ok) {
+    const patchPostResult = await response.json();
+
+    return {
+      success: true,
+      message: "Post updated successfully",
+      data: patchPostResult,
+    };
+  } else {
+    const errorData = await response.json();
+    return {
+      success: false,
+      message: errorData.error || "Failed to edit post",
+    };
+  }
+}
+
 export async function savePost(
   newPost: PostUpdate
 ): Promise<ActionResponse<Post>> {
   try {
-    if (!newPost.title || !newPost.image) {
+    console.log("new post", newPost);
+
+    if (!newPost.title || (!newPost.image && !newPost.image_url)) {
       return {
         success: false,
         message: "Please add an image and a title to your post",
       };
     }
 
-    const imageFilename = await processAndSaveImage(
-      newPost.image,
-      newPost.title
-    );
+    const imageFilename = newPost.image
+      ? await processAndSaveImage(newPost.image, newPost.title)
+      : newPost.image_url;
 
     if (typeof imageFilename !== "string") {
       return {

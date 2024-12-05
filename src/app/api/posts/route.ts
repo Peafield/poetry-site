@@ -92,6 +92,8 @@ export async function PATCH(req: NextRequest) {
     const json = await req.json();
     const parsedData = PostSchema.parse(json);
 
+    const { _id, ...updateData } = parsedData;
+
     // Connect to the MongoDB client
     const client = await clientPromise;
     const db = client.db(process.env.MONGO_DB_NAME);
@@ -99,7 +101,7 @@ export async function PATCH(req: NextRequest) {
     // Update the post with the given ID
     const result = await db
       .collection("posts")
-      .updateOne({ _id: new ObjectId(parsedData._id) }, { $set: parsedData });
+      .updateOne({ _id: new ObjectId(_id) }, { $set: updateData });
 
     // Respond with the number of documents modified
     return NextResponse.json(

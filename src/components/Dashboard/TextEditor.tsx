@@ -151,7 +151,6 @@ const TextEditor = ({ post, handleSave, disabled }: TextEditorProps) => {
           className="hidden"
           onChange={(e) => setNewPost({ ...post, image: e.target.files?.[0] })}
         />
-        {/* TODO: Disable save until all fields are entered */}
         {!disabled ? (
           <button
             onClick={() => handleSave(post)}
