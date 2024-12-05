@@ -3,6 +3,7 @@ import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Footer";
 // import Footer from "@/components/Footer";
 
 const playfair_display = Playfair_Display({
@@ -37,8 +38,7 @@ export default function RootLayout({
         <Toaster position="top-center" />
         <Navbar />
         <main className="w-full flex-1 pt-16">{children}</main>
-        {/* TODO: FIX FOOTER! */}
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
