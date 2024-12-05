@@ -1,12 +1,23 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        - MONGODB_URI=mongodb://mongo:27017/www_db
+        - JWT_SECRET=${JWT_SECRET}
+        - ADMIN_USERNAME=${ADMIN_USERNAME}
+        - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+        - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
     ports:
       - '3000:3000'
     depends_on:
       - mongo
     environment:
-      MONGO_URL: 'mongodb://mongo:27017/www_db'
+      - MONGODB_URI=mongodb://mongo:27017/www_db
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
     networks:
       - app-network
 
