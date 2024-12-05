@@ -8,6 +8,6 @@
   ],
   "plugins": ["jsx-a11y"],
   "rules": {
-    "no-console": "off"
+    "no-console": "warn"
   }
 }

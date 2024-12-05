@@ -132,8 +132,6 @@ export async function savePost(
   newPost: PostUpdate
 ): Promise<ActionResponse<Post>> {
   try {
-    console.log("new post", newPost);
-
     if (!newPost.title || (!newPost.image && !newPost.image_url)) {
       return {
         success: false,
