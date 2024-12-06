@@ -1,10 +1,24 @@
 FROM node:18-alpine AS base
 
+# Add build args at the top
+ARG MONGODB_URI
+ARG JWT_SECRET
+ARG ADMIN_USERNAME
+ARG ADMIN_PASSWORD
+ARG NEXT_PUBLIC_APP_URL
+
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
+
+# Set build-time env vars
+ENV MONGODB_URI=$MONGODB_URI
+ENV JWT_SECRET=$JWT_SECRET
+ENV ADMIN_USERNAME=$ADMIN_USERNAME
+ENV ADMIN_PASSWORD=$ADMIN_PASSWORD
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -22,6 +36,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Add these env vars
+ENV MONGODB_URI=$MONGODB_URI
+ENV JWT_SECRET=$JWT_SECRET
+ENV ADMIN_USERNAME=$ADMIN_USERNAME
+ENV ADMIN_PASSWORD=$ADMIN_PASSWORD
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+ENV NEXT_TELEMETRY_DISABLED 1
+
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
@@ -37,6 +59,12 @@ RUN \
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
+
+ENV MONGODB_URI=$MONGODB_URI
+ENV JWT_SECRET=$JWT_SECRET
+ENV ADMIN_USERNAME=$ADMIN_USERNAME
+ENV ADMIN_PASSWORD=$ADMIN_PASSWORD
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.

@@ -1,18 +1,32 @@
+# docker-compose.yml
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        - MONGODB_URI=mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo:27017/www_db?authSource=admin
+        - JWT_SECRET=${JWT_SECRET}
+        - ADMIN_USERNAME=${ADMIN_USERNAME}
+        - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+        - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
     ports:
-      - '3000:3000'
+      - "3000:3000"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/www_db
+      - MONGODB_URI=mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo:27017/www_db?authSource=admin
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   mongo:
     image: 'mongo:latest'
@@ -29,9 +43,14 @@ services:
       - app-network
     restart: always
     command: mongod --auth
-
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   mongo-data:
+    driver: local
 
 networks:
   app-network:
