@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build \
+          docker build --no-cache \
             --build-arg MONGODB_URI=${MONGODB_URI} \
             --build-arg JWT_SECRET=${JWT_SECRET} \
             --build-arg ADMIN_USERNAME=${ADMIN_USERNAME} \
@@ -63,6 +63,12 @@ jobs:
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.DROPLET_SSH_KEY }}
           debug: true
+          envs: |
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }}
+            ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+            NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
           script: |
             # Update packages and install Docker + Docker Compose
             apt-get update
@@ -82,5 +88,15 @@ jobs:
             fi
 
             cd ~/poetry-site
+
+            # Write environment variables to .env file so docker-compose can use them at runtime
+             cat > .env <<EOF
+            MONGODB_URI=${MONGODB_URI}
+            JWT_SECRET=${JWT_SECRET}
+            ADMIN_USERNAME=${ADMIN_USERNAME}
+            ADMIN_PASSWORD=${ADMIN_PASSWORD}
+            NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
+            EOF
+
             docker compose pull
             docker compose up -d
