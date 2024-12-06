@@ -15,7 +15,7 @@ services:
     restart: always
     command: mongod --auth
     healthcheck:
-      test: ["CMD", "mongosh", "--username", "${MONGO_USER}", "--password", "${MONGO_PASSWORD}", "--authenticationDatabase=admin", "--eval", "db.adminCommand('ping')"]
+      test: [ "CMD", "mongosh", "--username", "${MONGO_USER}", "--password", "${MONGO_PASSWORD}", "--authenticationDatabase=admin", "--eval", "db.adminCommand('ping')" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -43,7 +43,15 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
+
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
