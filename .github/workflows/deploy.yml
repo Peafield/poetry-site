@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build --no-cache \
+          docker build \
             --build-arg MONGODB_URI=${MONGODB_URI} \
             --build-arg JWT_SECRET=${JWT_SECRET} \
             --build-arg ADMIN_USERNAME=${ADMIN_USERNAME} \
@@ -63,6 +63,7 @@ jobs:
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.DROPLET_SSH_KEY }}
           debug: true
+          command_timeout: 20m
           envs: |
             MONGODB_URI=${{ secrets.MONGODB_URI }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
