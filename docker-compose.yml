@@ -1,6 +1,6 @@
 services:
   web:
-    image: jupitermaybe/poetry-site:latest
+    build: .
     ports:
       - '3000:3000'
     depends_on:
@@ -18,13 +18,21 @@ services:
     image: 'mongo:latest'
     ports:
       - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE=www_db
     volumes:
       - mongo-data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - app-network
+    restart: always
+    command: mongod --auth
 
 volumes:
   mongo-data:
 
 networks:
   app-network:
+    driver: bridge
