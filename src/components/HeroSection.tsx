@@ -4,7 +4,6 @@ import Image from "next/image";
 import clsx from "clsx";
 import { PostUpdate } from "@/types/posts";
 import { useEffect, useMemo } from "react";
-
 type HeroSectionProps = {
   children: React.ReactNode;
   showImage?: boolean;
@@ -25,7 +24,7 @@ const HeroSection = ({
         const alt = `Image for ${post.title || "New Post"}`;
         return { src, alt, needsCleanup: true };
       } else if (post.image_url) {
-        const src = `/mockImages/${post.image_url}`;
+        const src = `${process.env.IMAGE_STORAGE_PATH}/${post.image_url}`;
         const alt = `Image for ${post.title}`;
         return { src, alt, needsCleanup: false };
       }
