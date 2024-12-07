@@ -30,7 +30,7 @@ services:
         - ADMIN_PASSWORD=${ADMIN_PASSWORD}
         - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
     ports:
-      - "3000:3000"
+      - "80:3000"
     depends_on:
       mongo:
         condition: service_healthy
