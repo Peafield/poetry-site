@@ -37,9 +37,9 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-RUN mkdir -p /app/storage \
-    && chown -R nextjs:nodejs /app/storage \
-    && chmod -R 775 /app/storage
+RUN mkdir -p /app/public/storage \
+    && chown -R nextjs:nodejs /app/public/storage \
+    && chmod -R 775 /app/public/storage
 
 
 USER nextjs

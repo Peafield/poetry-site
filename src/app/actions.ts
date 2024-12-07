@@ -63,7 +63,7 @@ export async function processAndSaveImage(
     const filename = `${sanitizedTitle}.webp`;
 
     // Determine the storage path from the environment variable
-    const storagePath = process.env.IMAGE_STORAGE_PATH || "public/mockImages";
+    const storagePath = process.env.IMAGE_STORAGE_PATH || "public/storage";
     const filepath = path.join(storagePath, filename);
 
     // Save file

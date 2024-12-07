@@ -66,10 +66,10 @@ const Carousel = ({ posts }: CarouselProps) => {
             className="relative w-full mobile:h-[32dvh] md:h-[64dvh]"
           >
             <Image
-              src={`${process.env.IMAGE_STORAGE_PATH}/${post.image_url}`}
+              src={`/storage/${post.image_url}`}
               alt={`Image for ${post?.title}`}
               placeholder="blur"
-              blurDataURL={`${process.env.IMAGE_STORAGE_PATH}/${post.image_url}`}
+              blurDataURL={`/storage/${post.image_url}`}
               priority
               fill
               className="object-cover"
