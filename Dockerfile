@@ -34,8 +34,13 @@ COPY --from=builder /app/package.json ./package.json
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=bloguser:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=bloguser:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+RUN mkdir -p /app/storage \
+    && chown -R nextjs:nodejs /app/storage \
+    && chmod -R 775 /app/storage
+
 
 USER nextjs
 
