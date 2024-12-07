@@ -8,7 +8,7 @@ import getPreviewText from "@/utils/getPreviewText";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { ActionResponse } from "@/types/api";
-import { writeFile } from "fs/promises";
+import { unlink, writeFile } from "fs/promises";
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function testDatabaseConnection(): Promise<ActionResponse> {
@@ -185,6 +185,29 @@ export async function savePost(
     return {
       success: false,
       message: "Failed to save post",
+      error: errorMessage,
+    };
+  }
+}
+
+export async function deletePostImage(
+  imageUrl: string
+): Promise<ActionResponse> {
+  try {
+    const storagePath = process.env.IMAGE_STORAGE_PATH;
+    if (!storagePath) {
+      return {
+        success: false,
+        message: "IMAGE_STORAGE_PATH is not defined",
+      };
+    }
+    await unlink(path.join(storagePath, imageUrl));
+    return { success: true, message: "Image deleted successfully" };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return {
+      success: false,
+      message: "Failed to delete image",
       error: errorMessage,
     };
   }

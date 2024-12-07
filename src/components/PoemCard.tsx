@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "../../store/userStore";
 import toast from "react-hot-toast";
 import { IoWarning } from "react-icons/io5";
-import { deletePost } from "@/app/actions";
+import { deletePost, deletePostImage } from "@/app/actions";
 import { Post } from "@/types/posts";
 type PoemCardProps = {
   post: Post;
@@ -23,6 +23,7 @@ const PoemCard = ({ post }: PoemCardProps) => {
 
   const handleDelete = async () => {
     try {
+      await deletePostImage(post.image_url);
       await deletePost(post._id.toString());
       toast.success("Post deleted successfully");
       router.refresh();
