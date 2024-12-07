@@ -2,13 +2,13 @@
 
 import clientPromise from "@/lib/mongodb";
 import { Post, PostUpdate } from "@/types/posts";
-import { writeFile } from "fs";
 import path from "path";
 import sharp from "sharp";
 import getPreviewText from "@/utils/getPreviewText";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { ActionResponse } from "@/types/api";
+import { writeFile } from "fs/promises";
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function testDatabaseConnection(): Promise<ActionResponse> {
@@ -61,16 +61,13 @@ export async function processAndSaveImage(
     // Create filename
     const sanitizedTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
     const filename = `${sanitizedTitle}.webp`;
-    // TODO: Change for production
-    const filepath = path.join(process.cwd(), "public", "mockImages", filename);
+
+    // Determine the storage path from the environment variable
+    const storagePath = process.env.IMAGE_STORAGE_PATH || "public/mockImages";
+    const filepath = path.join(storagePath, filename);
 
     // Save file
-    await new Promise<void>((resolve, reject) => {
-      writeFile(filepath, webpBuffer, (err) => {
-        if (err) reject(err);
-        else resolve();
-      });
-    });
+    await writeFile(filepath, webpBuffer);
 
     return filename;
   } catch (error) {
