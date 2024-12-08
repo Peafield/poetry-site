@@ -108,6 +108,7 @@ const Dashboard = ({ postId }: DashboardProps) => {
             <ContentCard
               content={newPost.content || "You're words will appear here..."}
               date={newPost.date}
+              showShareButton={false}
             />
           </div>
         </div>

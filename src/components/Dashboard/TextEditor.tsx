@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
-import HardBreak from "@tiptap/extension-hard-break";
+import { HardBreak } from "@tiptap/extension-hard-break";
 import { useEffect } from "react";
 import { MdOutlineFormatBold } from "react-icons/md";
 import { MdOutlineFormatItalic } from "react-icons/md";
@@ -27,6 +27,16 @@ interface TextEditorProps {
 
 const TextEditor = ({ post, handleSave, disabled }: TextEditorProps) => {
   const { setNewPost } = usePostsCreationStore();
+
+  const CustomHardBreak = HardBreak.extend({
+    addKeyboardShortcuts() {
+      return {
+        ...HardBreak.config.keyboardShortcuts,
+        Enter: () => this.editor.commands.setHardBreak(),
+      };
+    },
+  });
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -38,7 +48,7 @@ const TextEditor = ({ post, handleSave, disabled }: TextEditorProps) => {
         placeholder: "Write your poem here...",
         emptyNodeClass: "is-editor-empty",
       }),
-      HardBreak,
+      CustomHardBreak,
     ],
     content: post.content,
     onUpdate: ({ editor }) => {
