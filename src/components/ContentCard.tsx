@@ -23,8 +23,6 @@ const ContentCard = ({
     return /<[a-z][\s\S]*>/i.test(str);
   };
 
-  console.log(content);
-
   useEffect(() => {
     if (linkCopied) {
       setTimeout(() => {

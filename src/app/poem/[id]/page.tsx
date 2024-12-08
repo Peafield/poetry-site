@@ -2,7 +2,7 @@ import Poem from "@/components/Poem";
 import { Post } from "@/types/posts";
 import { Metadata } from "next";
 
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ id: string }>;
