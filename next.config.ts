@@ -3,12 +3,19 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
-    domains: ["www.wendisworminghallwhimsies.uk", "localhost"],
     remotePatterns: [
       {
         protocol: "http",
         hostname: "localhost",
         port: "3000",
+      },
+      {
+        protocol: "https",
+        hostname: "wendisworminghallwhimsies.uk",
+      },
+      {
+        protocol: "https",
+        hostname: "www.wendisworminghallwhimsies.uk",
       },
     ],
   },
