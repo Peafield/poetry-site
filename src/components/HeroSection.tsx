@@ -48,10 +48,7 @@ const HeroSection = ({
 
   return (
     <section
-      className={clsx(
-        "relative mb-4 w-full mobile:h-[32dvh] md:h-[64dvh]",
-        className
-      )}
+      className={clsx("relative mb-4 mobile:h-[32dvh] md:h-[64dvh]", className)}
     >
       {/* TODO: Add back in blurdata when you can be bothered */}
       {showImage && (
