@@ -1,11 +1,12 @@
 import Poem from "@/components/Poem";
 import { Post } from "@/types/posts";
+import { Metadata } from "next";
 
 export async function generateMetaData({
   params,
 }: {
   params: Promise<{ id: string }>;
-}) {
+}): Promise<Metadata> {
   const id = (await params).id;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_APP_URL}/api/poem/${id}`
