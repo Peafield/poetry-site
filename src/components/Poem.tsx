@@ -32,7 +32,11 @@ const Poem = ({ id }: PoemProps) => {
             </h1>
           </div>
         </HeroSection>
-        <ContentCard content={post.content} date={post.date} />
+        <ContentCard
+          content={post.content}
+          date={post.date}
+          showShareButton={true}
+        />
       </>
     )
   );

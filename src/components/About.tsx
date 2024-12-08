@@ -32,7 +32,7 @@ const About = () => {
           </div>
         </div>
       </HeroSection>
-      <ContentCard content={ABOUT_ME_TEXT} />
+      <ContentCard content={ABOUT_ME_TEXT} showShareButton={false} />
     </>
   );
 };
