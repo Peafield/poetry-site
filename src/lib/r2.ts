@@ -28,7 +28,7 @@ export const uploadImageToR2 = async (
 
     await r2Client.send(command);
 
-    return `${process.env.R2_PUBLIC_URL}/${fileName}`;
+    return fileName;
   } catch (error) {
     console.error("Error uploading image to R2:", error);
     throw error;

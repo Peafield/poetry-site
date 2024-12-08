@@ -61,9 +61,13 @@ export async function processAndSaveImage(
     const sanitizedTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
     const filename = `${sanitizedTitle}.webp`;
 
-    const imageUrl = await uploadImageToR2(webpBuffer, filename, "image/webp");
+    const fileNameAfterUpload = await uploadImageToR2(
+      webpBuffer,
+      filename,
+      "image/webp"
+    );
 
-    return imageUrl;
+    return fileNameAfterUpload;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     return {

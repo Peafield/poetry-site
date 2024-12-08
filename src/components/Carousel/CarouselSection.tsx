@@ -1,4 +1,3 @@
-import useImageLoader from "@/Hooks/useImageLoader";
 import { Post } from "@/types/posts";
 import Image from "next/image";
 
@@ -7,12 +6,13 @@ type CarouselSectionProps = {
 };
 
 const CarouselSection = ({ post }: CarouselSectionProps) => {
-  const loader = useImageLoader({ src: post.image_url });
+  const src = post.image_url
+    ? `/api/image/${encodeURIComponent(post.image_url)}`
+    : "/placeholder.png";
   return (
     <div className="relative w-full mobile:h-[32dvh] md:h-[64dvh]">
       <Image
-        loader={() => loader}
-        src={post.image_url}
+        src={src}
         alt={`Image for ${post?.title}`}
         priority
         fill

@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { IoWarning } from "react-icons/io5";
 import { deletePost } from "@/app/actions";
 import { Post } from "@/types/posts";
-import useImageLoader from "@/Hooks/useImageLoader";
+
 type PoemCardProps = {
   post: Post;
 };
@@ -71,7 +71,9 @@ const PoemCard = ({ post }: PoemCardProps) => {
     );
   };
 
-  const loader = useImageLoader({ src: post.image_url });
+  const src = post.image_url
+    ? `/api/image/${encodeURIComponent(post.image_url)}`
+    : "/placeholder.png";
 
   return (
     <div
@@ -89,8 +91,7 @@ const PoemCard = ({ post }: PoemCardProps) => {
       <div className="relative h-1/2 w-full">
         {/* TODO: Add back in placeholder blur when you can be bothered */}
         <Image
-          loader={() => loader}
-          src={post.image_url}
+          src={src}
           alt={`Image for ${post.title}`}
           fill
           sizes="100%"
