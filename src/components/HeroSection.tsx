@@ -24,7 +24,7 @@ const HeroSection = ({
         const alt = `Image for ${post.title || "New Post"}`;
         return { src, alt, needsCleanup: true };
       } else if (post.image_url) {
-        const src = `/storage/${post.image_url}`;
+        const src = `${process.env.FULL_IMAGE_PATH}/${post.image_url}`;
         const alt = `Image for ${post.title}`;
         return { src, alt, needsCleanup: false };
       }

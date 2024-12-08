@@ -85,10 +85,10 @@ const PoemCard = ({ post }: PoemCardProps) => {
     >
       <div className="relative h-1/2 w-full">
         <Image
-          src={`/storage/${post.image_url}`}
+          src={`${process.env.FULL_IMAGE_PATH}/${post.image_url}`}
           alt={`Image for ${post.title}`}
           placeholder="blur"
-          blurDataURL={`/storage/${post.image_url}`}
+          blurDataURL={`${process.env.FULL_IMAGE_PATH}/${post.image_url}`}
           fill
           sizes="100%"
           className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
