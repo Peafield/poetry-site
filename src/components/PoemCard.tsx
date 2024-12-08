@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "../../store/userStore";
 import toast from "react-hot-toast";
 import { IoWarning } from "react-icons/io5";
-import { deletePost, deletePostImage } from "@/app/actions";
+import { deletePost } from "@/app/actions";
 import { Post } from "@/types/posts";
+import useImageLoader from "@/Hooks/useImageLoader";
 type PoemCardProps = {
   post: Post;
 };
@@ -21,9 +22,9 @@ const PoemCard = ({ post }: PoemCardProps) => {
     router.push(`/admin/dashboard/${post._id}`);
   };
 
+  // TODO: Add function to remove image from cloudflare
   const handleDelete = async () => {
     try {
-      await deletePostImage(post.image_url);
       await deletePost(post._id.toString());
       toast.success("Post deleted successfully");
       router.refresh();
@@ -70,6 +71,8 @@ const PoemCard = ({ post }: PoemCardProps) => {
     );
   };
 
+  const loader = useImageLoader({ src: post.image_url });
+
   return (
     <div
       role="button"
@@ -84,11 +87,11 @@ const PoemCard = ({ post }: PoemCardProps) => {
       className="group relative flex h-[400px] w-80 cursor-pointer flex-col overflow-hidden rounded-2xl bg-stone-100 shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
     >
       <div className="relative h-1/2 w-full">
+        {/* TODO: Add back in placeholder blur when you can be bothered */}
         <Image
-          src={`${process.env.FULL_IMAGE_PATH}/${post.image_url}`}
+          loader={() => loader}
+          src={post.image_url}
           alt={`Image for ${post.title}`}
-          placeholder="blur"
-          blurDataURL={`${process.env.FULL_IMAGE_PATH}/${post.image_url}`}
           fill
           sizes="100%"
           className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"

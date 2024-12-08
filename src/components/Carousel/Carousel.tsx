@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import ChevronLeftIcon from "./icons/ChevronLeftIcon";
-import ChevronRightIcon from "./icons/ChevronRightIcon";
+import ChevronLeftIcon from "../icons/ChevronLeftIcon";
+import ChevronRightIcon from "../icons/ChevronRightIcon";
 import { AUTO_SLIDE_INTERVAL } from "@/app/constants/constants";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types/posts";
+import CarouselSection from "./CarouselSection";
 
 type CarouselProps = {
   posts: Post[];
@@ -61,28 +61,7 @@ const Carousel = ({ posts }: CarouselProps) => {
         style={{ width: `${posts.length * 100}%` }}
       >
         {posts.map((post, index) => (
-          <div
-            key={index}
-            className="relative w-full mobile:h-[32dvh] md:h-[64dvh]"
-          >
-            <Image
-              src={`${process.env.FULL_IMAGE_PATH}/${post.image_url}`}
-              alt={`Image for ${post?.title}`}
-              placeholder="blur"
-              blurDataURL={`${process.env.FULL_IMAGE_PATH}/${post.image_url}`}
-              priority
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-900/35">
-              <div className="flex flex-col items-center justify-center gap-y-2">
-                <h2 className="text-center font-lato font-bold text-white mobile:text-2xl md:text-4xl">
-                  {post.title}
-                </h2>
-                <p className="w-1/2 text-center font-playfair_display font-medium leading-relaxed text-white  mobile:text-xl md:text-2xl">{`"${post.preview_text}"`}</p>
-              </div>
-            </div>
-          </div>
+          <CarouselSection key={index} post={post} />
         ))}
       </div>
 

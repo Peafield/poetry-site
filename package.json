@@ -17,7 +17,10 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.705.0",
+    "@aws-sdk/s3-request-presigner": "^3.705.0",
     "@designbycode/tailwindcss-text-shadow": "^2.2.1",
+    "@tiptap/core": "^2.7.0",
     "@tiptap/extension-hard-break": "^2.10.3",
     "@tiptap/extension-placeholder": "^2.10.3",
     "@tiptap/extension-text-align": "^2.10.3",
@@ -28,6 +31,7 @@
     "@types/html-to-text": "^9.0.4",
     "clsx": "^2.1.1",
     "compromise": "^14.14.3",
+    "csstype": "^3.0.10",
     "html-to-text": "^9.0.5",
     "jsonwebtoken": "^9.0.2",
     "lint-staged": "^15.2.10",

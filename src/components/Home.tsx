@@ -2,7 +2,7 @@
 
 import HeroSection from "@/components/HeroSection";
 import LatestPost from "./LatestSection";
-import Carousel from "./Carousel";
+import Carousel from "./Carousel/Carousel";
 import SectionHeading from "./SectionHeading";
 import { ApiResponse } from "@/types/api";
 import { usePostsStore } from "../../store/postsStore";

@@ -2,13 +2,12 @@
 
 import clientPromise from "@/lib/mongodb";
 import { Post, PostUpdate } from "@/types/posts";
-import path from "path";
 import sharp from "sharp";
 import getPreviewText from "@/utils/getPreviewText";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { ActionResponse } from "@/types/api";
-import { unlink, writeFile } from "fs/promises";
+import { uploadImageToR2 } from "@/lib/r2";
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function testDatabaseConnection(): Promise<ActionResponse> {
@@ -62,14 +61,9 @@ export async function processAndSaveImage(
     const sanitizedTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
     const filename = `${sanitizedTitle}.webp`;
 
-    // Determine the storage path from the environment variable
-    const storagePath = process.env.IMAGE_STORAGE_PATH || "public/storage";
-    const filepath = path.join(storagePath, filename);
+    const imageUrl = await uploadImageToR2(webpBuffer, filename, "image/webp");
 
-    // Save file
-    await writeFile(filepath, webpBuffer);
-
-    return filename;
+    return imageUrl;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     return {
@@ -185,29 +179,6 @@ export async function savePost(
     return {
       success: false,
       message: "Failed to save post",
-      error: errorMessage,
-    };
-  }
-}
-
-export async function deletePostImage(
-  imageUrl: string
-): Promise<ActionResponse> {
-  try {
-    const storagePath = process.env.IMAGE_STORAGE_PATH;
-    if (!storagePath) {
-      return {
-        success: false,
-        message: "IMAGE_STORAGE_PATH is not defined",
-      };
-    }
-    await unlink(path.join(storagePath, imageUrl));
-    return { success: true, message: "Image deleted successfully" };
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    return {
-      success: false,
-      message: "Failed to delete image",
       error: errorMessage,
     };
   }
