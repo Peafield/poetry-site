@@ -60,7 +60,8 @@ const TextEditor = ({ post, handleSave, disabled }: TextEditorProps) => {
     },
     editorProps: {
       attributes: {
-        class: "max-w-full h-full focus:outline-primary/35 p-8 break-words",
+        class:
+          "max-w-full h-full focus:outline-primary/35 p-8 break-words text-xl",
       },
     },
     immediatelyRender: false,

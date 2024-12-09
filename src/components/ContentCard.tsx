@@ -41,13 +41,13 @@ const ContentCard = ({
       return (
         <div
           dangerouslySetInnerHTML={{ __html: content }}
-          className="mt-4 h-full max-w-full break-words p-8 font-lato font-medium focus:outline-primary/35"
+          className="mt-4 h-full max-w-full break-words p-8 font-lato text-xl font-medium focus:outline-primary/35"
         />
       );
     }
 
     return (
-      <p className="mt-4 h-full max-w-full break-words p-8 font-lato font-medium focus:outline-primary/35">
+      <p className="mt-4 h-full max-w-full break-words p-8 font-lato text-xl font-medium focus:outline-primary/35">
         {content}
       </p>
     );
