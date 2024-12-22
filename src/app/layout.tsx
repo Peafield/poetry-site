@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/Footer";
-// import Footer from "@/components/Footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const playfair_display = Playfair_Display({
   subsets: ["latin"],
@@ -40,6 +40,7 @@ export default function RootLayout({
         <main className="flex-1 pt-16">{children}</main>
         <Footer />
       </body>
+      <GoogleAnalytics gaId="G-DR6G4WVQ0J" />
     </html>
   );
 }
